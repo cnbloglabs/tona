@@ -69,19 +69,40 @@ interface TonaPluginOptions {
    * @default 'theme'
    */
   themeName?: string
+  /**
+   * When true, emit Inline CSS Dist (CSS injected into the IIFE JS).
+   * @default false
+   */
+  inlineCss?: boolean
+  /**
+   * When true, include a content hash in the JS filename.
+   * @default true
+   */
+  hash?: boolean
 }
 ```
 
 ## Build Configuration
 
-The plugin automatically configures Vite for theme development:
+The plugin automatically configures Vite for theme development.
+
+### Default Theme Dist (`inlineCss: false`)
 
 | Setting            | Value                          | Description                             |
 | ------------------ | ------------------------------ | --------------------------------------- |
 | Library Format     | IIFE                           | Immediately Invoked Function Expression |
 | Entry Point        | `src/main.ts` or `src/main.js` | Auto-detected                           |
-| Output Filename    | `{themeName}.min.js`           | Default: `theme.min.js`                 |
-| CSS Code Splitting | Disabled                       | All styles bundled together             |
+| Output Filename    | `{themeName}.[hash].js`        | Set `hash: false` for `{themeName}.js`  |
+| CSS                | `{themeName}.min.css`          | Independent stylesheet                  |
+
+### Inline CSS Dist (`inlineCss: true`)
+
+| Setting            | Value                          | Description                                      |
+| ------------------ | ------------------------------ | ------------------------------------------------ |
+| Library Format     | IIFE                           | Immediately Invoked Function Expression          |
+| Entry Point        | `src/main.ts` or `src/main.js` | Auto-detected                                    |
+| Output Filename    | `{themeName}.[hash].js`        | Single JS file; CSS injected at runtime          |
+| Theme CSS file     | None                           | Styles embedded via `document.createElement('style')` |
 
 ## Development Server
 

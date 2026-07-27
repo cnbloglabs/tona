@@ -69,19 +69,40 @@ interface TonaPluginOptions {
    * @default 'theme'
    */
   themeName?: string
+  /**
+   * 为 true 时产出 Inline CSS Dist（CSS 注入进 IIFE JS）
+   * @default false
+   */
+  inlineCss?: boolean
+  /**
+   * 为 true 时在 JS 文件名中写入内容哈希
+   * @default true
+   */
+  hash?: boolean
 }
 ```
 
 ## 构建配置
 
-该插件自动配置 Vite 用于主题开发：
+该插件自动配置 Vite 用于主题开发。
 
-| 设置         | 值                             | 描述                 |
-| ------------ | ------------------------------ | -------------------- |
-| 库格式       | IIFE                           | 立即执行函数表达式   |
-| 入口点       | `src/main.ts` 或 `src/main.js` | 自动检测             |
-| 输出文件名   | `{themeName}.min.js`           | 默认：`theme.min.js` |
-| CSS 代码分割 | 禁用                           | 所有样式打包在一起   |
+### 默认 Theme Dist（`inlineCss: false`）
+
+| 设置       | 值                             | 描述                                    |
+| ---------- | ------------------------------ | --------------------------------------- |
+| 库格式     | IIFE                           | 立即执行函数表达式                      |
+| 入口点     | `src/main.ts` 或 `src/main.js` | 自动检测                                |
+| 输出文件名 | `{themeName}.[hash].js`        | `hash: false` 时为 `{themeName}.js`     |
+| CSS        | `{themeName}.min.css`          | 独立样式表                              |
+
+### Inline CSS Dist（`inlineCss: true`）
+
+| 设置         | 值                             | 描述                                                 |
+| ------------ | ------------------------------ | ---------------------------------------------------- |
+| 库格式       | IIFE                           | 立即执行函数表达式                                   |
+| 入口点       | `src/main.ts` 或 `src/main.js` | 自动检测                                             |
+| 输出文件名   | `{themeName}.[hash].js`        | 单 JS 文件；CSS 运行时注入                           |
+| 主题 CSS 文件 | 无                             | 样式经 `document.createElement('style')` 嵌入        |
 
 ## 开发服务器
 

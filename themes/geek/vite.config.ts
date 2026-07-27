@@ -5,6 +5,8 @@ export default defineConfig({
   plugins: [
     tona({
       themeName: 'geek',
+      inlineCss: true,
+      hash: false,
     }),
   ],
 })

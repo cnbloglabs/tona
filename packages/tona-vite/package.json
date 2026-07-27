@@ -49,7 +49,9 @@
   },
   "scripts": {
     "dev": "vp pack --watch",
-    "build": "vp pack"
+    "build": "vp pack",
+    "test": "vp test",
+    "test:run": "vp test run"
   },
   "devDependencies": {
     "@types/node": "catalog:",

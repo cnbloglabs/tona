@@ -16,13 +16,23 @@ export interface TonaPluginOptions {
    * @default 'theme'
    */
   themeName?: string
+  /**
+   * When true, emit Inline CSS Dist (CSS injected into the IIFE JS).
+   * @default false
+   */
+  inlineCss?: boolean
+  /**
+   * When true, include a content hash in the JS filename.
+   * @default true
+   */
+  hash?: boolean
 }
 
 /**
  * Vite plugin for Tona themes - combines dynamic script extension and shared assets serving
  */
 export default function tona(options: TonaPluginOptions = {}): Plugin {
-  const { themeName = 'theme' } = options
+  const { themeName = 'theme', inlineCss = false, hash = true } = options
 
   // Default path to shared assets
   const assetsPath = path.join(__dirname, '..', 'public')
@@ -47,6 +57,10 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
         return config
       }
 
+      const jsFileName = hash
+        ? () => `${themeName}.[hash].js`
+        : () => `${themeName}.js`
+
       const existingLib = config.build?.lib
       const libConfig =
         existingLib && typeof existingLib === 'object'
@@ -55,15 +69,20 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
             formats: existingLib.formats || (['iife'] as LibraryFormats[]),
             entry: existingLib.entry || resolvedEntryPath,
             name: existingLib.name || themeName,
-            fileName: existingLib.fileName || (() => `${themeName}.[hash].js`),
-            cssFileName: existingLib.cssFileName || `${themeName}.min`,
+            fileName: existingLib.fileName || jsFileName,
+            ...(inlineCss
+              ? {}
+              : {
+                cssFileName:
+                  existingLib.cssFileName || `${themeName}.min`,
+              }),
           }
           : {
             formats: ['iife'] as LibraryFormats[],
             entry: resolvedEntryPath,
             name: themeName,
-            fileName: () => `${themeName}.[hash].js`,
-            cssFileName: `${themeName}.min`,
+            fileName: jsFileName,
+            ...(inlineCss ? {} : { cssFileName: `${themeName}.min` }),
           }
 
       const buildConfig = config.build ?? {}
@@ -80,7 +99,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
           },
         },
         build: {
-          cssCodeSplit: buildConfig.cssCodeSplit ?? false,
+          cssCodeSplit: buildConfig.cssCodeSplit ?? inlineCss,
           lib: libConfig,
           ...(bundlerOptions ? { rolldownOptions: bundlerOptions } : {}),
         },
