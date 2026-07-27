@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node scripts/dev-theme.ts",
     "build:theme": "node scripts/build-theme.ts",
-    "build:pkg": "vp run --cache build --filter './packages/**'",
+    "build:pkg":"pnpm -F './packages/**' build",
     "docs:dev": "pnpm -C docs run dev",
     "docs:build": "pnpm -C docs run build",
     "typecheck": "vue-tsc --noEmit",

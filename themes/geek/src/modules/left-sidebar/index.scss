@@ -32,6 +32,64 @@ $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
       color: list.nth($iconsColor, $i);
     }
   }
+
+  .custom-links-entry {
+    display: none;
+    position: relative;
+
+    .custom-links-nav .fas::before {
+      color: #54a0ff;
+    }
+  }
+}
+
+.custom-links-popover {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  min-width: 140px;
+  max-width: 200px;
+  padding: 8px;
+  border-radius: 4px;
+  background: var(--geek-color-1);
+  border: 1px solid var(--geek-color-3);
+
+  &.is-open {
+    display: block;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+    font-size: 13px;
+
+    li {
+      display: block;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+
+      a {
+        display: block;
+        padding: 4px;
+        margin: 0;
+        font-size: 13px;
+        color: var(--geek-color-9);
+        text-decoration: none;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-radius: 4px;
+
+        &:hover {
+          color: var(--geek-color-10);
+          background: var(--geek-color-3);
+        }
+      }
+    }
+  }
 }
 
 .left-side-wrapper {
@@ -159,6 +217,21 @@ $iconsColor: #0984e3 #00d1b2 #ff6b81 #10ac84 #ffd257 #00d1b2 #48c774;
           span:last-child {
             margin-top: 10px;
           }
+        }
+      }
+    }
+
+    .custom-links-entry {
+      display: block;
+
+      .custom-links-nav {
+        margin-bottom: 5px;
+        cursor: pointer;
+
+        li {
+          padding: 18px 0;
+          flex-direction: column;
+          font-size: 12px;
         }
       }
     }
