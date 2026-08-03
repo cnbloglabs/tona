@@ -95,6 +95,7 @@ interface DarkModeOptions {
   darkDefault: boolean
   autoDark: boolean
   autoLight: boolean
+  autoMode: boolean
 }
 interface MusicPlayerOptions {
   enable: boolean

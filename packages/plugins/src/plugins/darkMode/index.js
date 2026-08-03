@@ -56,12 +56,42 @@ function changeMode(mode, withTransition = true) {
 }
 
 /**
+ * 跟随系统深色/浅色模式
+ */
+function followSystemMode() {
+  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  changeMode(isDark ? 'dark' : 'light', false)
+}
+
+/**
+ * 监听系统主题变化，跟随切换
+ */
+function listenSystemMode() {
+  const query = window.matchMedia('(prefers-color-scheme: dark)')
+  const handleChange = (event) => {
+    changeMode(event.matches ? 'dark' : 'light')
+  }
+  if (query.addEventListener) {
+    query.addEventListener('change', handleChange)
+  } else if (query.addListener) {
+    query.addListener(handleChange)
+  }
+}
+
+/**
  * 初始化
  * @param {string} darkDefault
  * @param {boolean} autoDark
  * @param {boolean} autoLight
+ * @param {boolean} autoMode
  */
-function init(darkDefault, autoDark, autoLight) {
+function init(darkDefault, autoDark, autoLight, autoMode) {
+  if (autoMode) {
+    followSystemMode()
+    listenSystemMode()
+    return
+  }
+
   const hour = new Date().getHours()
   const isNight = hour > 19 || hour <= 5
   const storage = localStorage.modeType
@@ -104,12 +134,12 @@ function listenToggleButtonClick() {
 }
 
 export function darkMode(_, devOptions) {
-  const { enable, darkDefault, autoDark, autoLight } =
+  const { enable, darkDefault, autoDark, autoLight, autoMode } =
     getDarkModeOptions(devOptions)
 
   if (!enable) {
     return
   }
-  init(darkDefault, autoDark, autoLight)
+  init(darkDefault, autoDark, autoLight, autoMode)
   listenToggleButtonClick()
 }

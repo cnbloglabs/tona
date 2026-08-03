@@ -553,6 +553,7 @@ describe('Options 配置测试', () => {
         darkDefault: false,
         autoDark: false,
         autoLight: false,
+        autoMode: false,
       })
     })
 
@@ -571,6 +572,26 @@ describe('Options 配置测试', () => {
         darkDefault: true,
         autoDark: false,
         autoLight: false,
+        autoMode: false,
+      })
+    })
+
+    it('应该支持跟随系统模式配置', () => {
+      window.opts = {
+        mode: {
+          enable: true,
+          autoMode: true,
+        },
+      }
+
+      const options = getDarkModeOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        darkDefault: false,
+        autoDark: false,
+        autoLight: false,
+        autoMode: true,
       })
     })
   })
