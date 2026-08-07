@@ -1,11 +1,12 @@
 # 01 — 补回左下角 GitHub 关注按钮
 
-Status: claimed
+Status: done
 Blocked by: None
 
 ## Comments
 
 Batch 2026-08-07: start — af2f8270
+done — ef954122, 28ebb17e (build green: dist/geek.js contains leftside-bottom/follow-me/Fork me on GitHub; also restored missing package.json name field so the filter command works)
 
 ## What to build
 
