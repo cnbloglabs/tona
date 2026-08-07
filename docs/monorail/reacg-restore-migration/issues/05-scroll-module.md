@@ -1,6 +1,6 @@
 # 05 — scroll 模块（滚动隐藏导航）
 
-Status: open
+Status: done
 Blocked by: 01
 
 ## What to build
