@@ -486,6 +486,7 @@ describe('Options 配置测试', () => {
         height: 200,
         position: 'left',
         gap: 'default',
+        mute: false,
       })
     })
 
@@ -510,6 +511,29 @@ describe('Options 配置测试', () => {
         height: 200,
         position: 'left',
         gap: 'default',
+        mute: false,
+      })
+    })
+
+    it('应该合并用户静音配置', () => {
+      window.opts = {
+        live2d: {
+          mute: true,
+        },
+      }
+
+      const options = getLive2dOptions()
+
+      expect(options).toEqual({
+        enable: false,
+        page: 'all',
+        agent: 'pc',
+        model: 'haru-01',
+        width: 150,
+        height: 200,
+        position: 'left',
+        gap: 'default',
+        mute: true,
       })
     })
   })

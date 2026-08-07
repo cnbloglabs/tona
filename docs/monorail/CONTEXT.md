@@ -1,5 +1,9 @@
 # Domain glossary
 
+## Live2D Mute
+
+live2d 插件 `live2d` 配置里的布尔键 `mute`（默认 `false`）：为 true 时模型互动照常触发动画，但播放 motion sound 的 audio 不发声。
+
 ## Custom Links
 
 用户通过主题配置 `links` 提供的外链列表（`name` + `link`）。宽屏下以侧边栏文字列表呈现；收起态下通过 Custom Links Popover 呈现。

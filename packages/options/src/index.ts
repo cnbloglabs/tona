@@ -164,6 +164,7 @@ export const getLive2dOptions: GetLive2dOptions = defineOptions('live2d', {
   height: 200,
   position: 'left',
   gap: 'default',
+  mute: false,
 })
 export const getLockScreenOptions: GetLockScreenOptions = defineOptions(
   'lock',

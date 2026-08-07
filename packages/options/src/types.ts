@@ -84,6 +84,14 @@ interface ImagePreviewOptions {
 }
 interface Live2dOptions {
   enable: boolean
+  page: Page
+  agent: 'pc' | 'phone' | 'all'
+  model: string
+  width: number
+  height: number
+  position: 'left' | 'right'
+  gap: string
+  mute: boolean
 }
 interface LockScreenOptions {
   enable: boolean
