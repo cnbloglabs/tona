@@ -1,6 +1,6 @@
 # 01 — main.js 接入模块注册与代码插件
 
-Status: claimed
+Status: done
 Blocked by: None
 
 ## What to build
@@ -29,3 +29,7 @@ Blocked by: None
 - [ ] `plugins.scss` 含三个代码插件的 `@use`
 - [ ] `pnpm --filter tona-theme-reacg build` 构建成功
 - [ ] 产物 `dist/reacg.js` 含 `codeHighlight` 相关字符串（codeHighlight 会在 post 页注入 highlight 主题样式）
+
+## Comments
+
+- 2026-08-07 build: 全部验收点通过（TDD red→green）。red: dist 无 copy-btns/awes-linenumber/buildMarkdownHighlight；green: `pnpm --filter tona-theme-reacg build` 成功，dist/reacg.js 含 `--hl-base`(×2, codeHighlight themes)、`copy-btns`(×2)、`awes-linenumber`(×2)。glob 注册块位于 style import 之后 (main.js:29-35)，无 modules/ 目录（空 glob 不报错）。commits: a571126f（实现，claim 见 00634ffe）。全量测试 211/212 通过，1 个失败为 main 上既有问题（packages/options 音乐播放器默认配置测试，与本次改动无关）；vue-tsc 未安装，typecheck 不可用。
