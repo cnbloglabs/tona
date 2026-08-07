@@ -18,15 +18,17 @@ function buildCopyright() {
  * 构建自定义链接
  */
 function buildCustomLinks(devOptions) {
-  const config = getLinksOptions(devOptions)
+  const { enable, value } = getLinksOptions(devOptions)
 
-  if (config.links.length) {
-    const $links = $('<ul id="links"></ul>')
-    for (const { title, url } of config.links) {
-      $links.append(`<li><a href='${url}'>${title}</a></li>`)
-    }
-    $('#footer').prepend($links.prop('outerHTML'))
+  if (!enable || !value.length) {
+    return
   }
+
+  const $links = $('<ul id="links"></ul>')
+  for (const { name, link } of value) {
+    $links.append(`<li><a href='${link}'>${name}</a></li>`)
+  }
+  $('#footer').prepend($links.prop('outerHTML'))
 }
 
 export function footer(_, devOptions) {

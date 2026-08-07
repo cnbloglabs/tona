@@ -21,42 +21,11 @@ function buildLogo() {
   $('#left-side').append(el)
 }
 
-/**
- * 兼容旧的配置 Array<Link>
- * 当前推荐的配置类型为
- *    {
- *      enable: boolean;
- *      value: Array<Link>;
- *    }
- */
-function isOldConfig(userConfig) {
-  for (const [key] of Object.entries(userConfig)) {
-    if (!Number.isNaN(Number.parseInt(key, 10))) {
-      return true
-    }
-  }
-  return false
-}
-
-function resolveCustomLinks() {
-  const userConfig = getLinksOptions()
-  if (isOldConfig(userConfig)) {
-    const links = []
-    for (const [key, value] of Object.entries(userConfig)) {
-      if (!Number.isNaN(Number.parseInt(key, 10))) {
-        links.push(value)
-      }
-    }
-    return { enabled: true, links }
-  }
-  const { enable, value } = userConfig
-  return { enabled: !!enable, links: value || [] }
-}
-
-function buildCustomLinks({ enabled, links }) {
-  if (!enabled) {
+function buildCustomLinks(links) {
+  if (!links.length) {
     return
   }
+
   const el = $('<div class="links left-side-wrapper"><ul></ul></div>')
   for (const { name, link } of links) {
     el.find('ul').append(
@@ -175,7 +144,7 @@ function appendCollapsedCustomLinksNav(links) {
   bindCustomLinksPopover($entry)
 }
 
-function removeHeaderToLeftSidebar(resolvedLinks) {
+function removeHeaderToLeftSidebar(links) {
   const navList = [
     {
       icon: 'fa-blog',
@@ -248,15 +217,18 @@ function removeHeaderToLeftSidebar(resolvedLinks) {
 
   $('#left-side .logo').after(el)
 
-  if (resolvedLinks.enabled) {
-    appendCollapsedCustomLinksNav(resolvedLinks.links)
+  if (links.length) {
+    appendCollapsedCustomLinksNav(links)
   }
 }
 
 export function install() {
   buildLeftSidebarContainer()
   buildLogo()
-  const resolvedLinks = resolveCustomLinks()
-  buildCustomLinks(resolvedLinks)
-  removeHeaderToLeftSidebar(resolvedLinks)
+
+  const { enable, value } = getLinksOptions()
+  const links = enable ? value : []
+
+  buildCustomLinks(links)
+  removeHeaderToLeftSidebar(links)
 }

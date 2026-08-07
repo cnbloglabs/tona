@@ -447,6 +447,44 @@ describe('Options 配置测试', () => {
         ],
       })
     })
+
+    it('应该兼容旧版数组配置并统一为最新格式', () => {
+      window.opts = {
+        links: [
+          { name: 'GitHub', link: 'https://github.com' },
+          { name: 'Blog', link: 'https://blog.com' },
+        ],
+      }
+
+      const options = getLinksOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        value: [
+          { name: 'GitHub', link: 'https://github.com' },
+          { name: 'Blog', link: 'https://blog.com' },
+        ],
+      })
+    })
+
+    it('应该兼容旧版键值为对象的配置', () => {
+      window.opts = {
+        links: {
+          0: { name: 'GitHub', link: 'https://github.com' },
+          1: { name: 'Blog', link: 'https://blog.com' },
+        },
+      }
+
+      const options = getLinksOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        value: [
+          { name: 'GitHub', link: 'https://github.com' },
+          { name: 'Blog', link: 'https://blog.com' },
+        ],
+      })
+    })
   })
 
   describe('图片预览配置测试', () => {

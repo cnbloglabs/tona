@@ -13,7 +13,7 @@ interface Lrc {
   type: 1 | 3
   color: string
 }
-interface Link {
+export interface Link {
   name: string
   link: string
 }
