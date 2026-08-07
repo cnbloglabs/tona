@@ -28,9 +28,27 @@
     width: 100%;
     overflow: auto;
   }
+  #sidebar_news {
+    #blog-news {
+      display: flex;
+      flex-direction: column;
+      .custom-avatar {
+        margin-bottom: 8px;
+        width: 100%;
+        height: 140px;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 767px) {
+  #sidebar_news {
+    #blog-news {
+      .custom-avatar {
+        height: 200px;
+      }
+    }
+  }
   #header {
     &::after {
       position: fixed;
