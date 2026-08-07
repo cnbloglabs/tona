@@ -1,6 +1,6 @@
 # 02 — icons 模块（iconfont 图标系统）
 
-Status: open
+Status: claimed
 Blocked by: 01
 
 ## What to build
@@ -12,6 +12,7 @@ Blocked by: 01
 - `index.scss`：原样迁入 `.icon` 及各类目样式。
 
 **适配改动（相对旧代码）**：
+
 - import 路径改为当前结构：`../../constants/cnblog`、`../../constants/links`、`../../utils/helpers`、`../../utils/cnblog`、`tona-options` 的 `getGiteeOptions`/`getGithubOptions`。注意当前 `utils/cnblog.js` 的 `getCurrentPage()` 已存在且逻辑一致。
 - **friends 死链修复**：`setSidebarIcon` 的 `sidebarWraps.friends` 从 `'#sidebar_links1065840'` 改为 `'#sidebar_links'`（旧链几乎必不存在，会导致 `poll` 轮询 180s）。
 - `setGitee`/`setGithub` 的 `getGiteeOptions()`/`getGithubOptions()` 需传 `devOptions`（若模块 `install(_, devOptions)` 能拿到则透传；否则从 `window.opts` 读取——与 `getThemeOptions().avatar` 同源）。
