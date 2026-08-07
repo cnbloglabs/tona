@@ -579,6 +579,37 @@ importers:
         specifier: npm:@voidzero-dev/vite-plus-core@latest
         version: '@voidzero-dev/vite-plus-core@0.2.8(@types/node@25.5.0)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.1)(tsx@4.20.5)(typescript@5.9.3)(unrun@0.2.32)(yaml@2.8.2)'
 
+  themes/view:
+    dependencies:
+      tona:
+        specifier: workspace:*
+        version: link:../../packages/core
+      tona-options:
+        specifier: workspace:*
+        version: link:../../packages/options
+      tona-plugins:
+        specifier: workspace:*
+        version: link:../../packages/plugins
+    devDependencies:
+      '@types/jquery':
+        specifier: 'catalog:'
+        version: 4.0.0
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.5.0
+      sass:
+        specifier: 'catalog:'
+        version: 1.98.0
+      terser:
+        specifier: 'catalog:'
+        version: 5.46.1
+      tona-vite:
+        specifier: workspace:*
+        version: link:../../packages/tona-vite
+      vite:
+        specifier: npm:@voidzero-dev/vite-plus-core@latest
+        version: '@voidzero-dev/vite-plus-core@0.2.8(@types/node@25.5.0)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.1)(tsx@4.20.5)(typescript@5.9.3)(unrun@0.2.32)(yaml@2.8.2)'
+
 packages:
 
   '@ampproject/remapping@2.3.0':
@@ -6762,7 +6793,7 @@ snapshots:
   vite@8.0.0(@types/node@25.5.0)(jiti@2.6.1)(sass@1.98.0)(terser@5.46.1)(tsx@4.20.5)(yaml@2.8.2):
     dependencies:
       '@oxc-project/runtime': 0.115.0
-      lightningcss: 1.32.0
+      lightningcss: 1.33.0
       picomatch: 4.0.3
       postcss: 8.5.8
       rolldown: 1.0.0-rc.9

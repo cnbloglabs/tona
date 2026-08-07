@@ -1,0 +1,25 @@
+@mixin flex($direction: row, $inline: block) {
+    display: if($inline==block, flex, inline-block);
+    flex-direction: $direction;
+    flex-wrap: wrap;
+}
+
+@mixin center($direction: v) {
+    display: flex;
+    @if $direction == h {
+        justify-content: center;
+    }
+    @if $direction == v {
+        align-items: center;
+    }
+    @if $direction == all {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@mixin text-over {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

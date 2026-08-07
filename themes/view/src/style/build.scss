@@ -1,0 +1,13 @@
+#lnkBlogLogo {
+    position: relative;
+    .message-count {
+        position: absolute;
+        top: 1px;
+        right: 5px;
+        background-color: var(--themeColor);
+        color: #fff;
+        font-size: 12px;
+        padding: 0px 5px;
+        border-radius: 50%;
+    }
+}
