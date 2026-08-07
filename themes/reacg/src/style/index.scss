@@ -92,6 +92,12 @@ body {
   }
 }
 
+// 滚动隐藏导航：向下滚动隐藏头部导航
+#header.header-hide {
+  transform: translate3d(0, -100%, 0);
+  transition: all 0.2s;
+}
+
 #main {
   position: relative;
   display: flex;
