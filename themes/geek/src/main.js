@@ -3,6 +3,10 @@ import {
   background,
   catalog,
   clickEffects,
+  codeCopy,
+  codeHighlight,
+  codeLang,
+  codeLinenumbers,
   colorMode,
   commentsAvatars,
   darkMode,
@@ -27,6 +31,10 @@ Object.values(import.meta.glob('./modules/**/*.js', { eager: true })).forEach(
 
 createTheme()
   .use(clickEffects, { enable: false })
+  .use(codeCopy, { enable: true })
+  .use(codeHighlight, { enable: true })
+  .use(codeLang, { enable: true })
+  .use(codeLinenumbers, { enable: true })
   .use(commentsAvatars, { enable: true })
   .use(colorMode, { enable: true, color: '#2F63FF' })
   .use(emoji, { enable: true })
