@@ -1,11 +1,12 @@
 # 02 — 接回四个代码插件
 
-Status: claimed
+Status: done
 Blocked by: None
 
 ## Comments
 
 Batch 2026-08-07: start — af2f8270
+done — ef954122, e633e424 (build green: dist/geek.js contains codeHighlight/codeCopy/codeLang option registrations, codeLinenumbers JS body (awes-linenumber addClass), use chain has 4 enable:true uses after clickEffects; inline CSS has copy-btns/awes-lang/awes-linenumber)
 
 ## What to build
 
