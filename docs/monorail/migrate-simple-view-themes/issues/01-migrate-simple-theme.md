@@ -1,6 +1,6 @@
 # 01 — 迁移 simple 主题
 
-Status: claimed
+Status: done
 Blocked by: None
 
 ## What to build
@@ -39,15 +39,16 @@ colorMode、footer、codeHighlight、codeCopy、codeLinenumbers、imagePreview�
 
 ## Acceptance criteria
 
-- [ ] `themes/simple/` 完整结构就位（package.json + vite.config.ts + src/）
-- [ ] main.js 用 `import.meta.glob` 注册模块 + 15 个插件 `.use()` 链
-- [ ] 4 个自研模块（header/side/catalog/scroll）`install()` 就位，逻辑忠实迁移
-- [ ] catalog 用 `getCatalogOptions` 取 enable，保留自研逻辑（不用新 catalog 插件）
-- [ ] 样式迁移完整，plugins.scss 的 `@use ... with (...)` 映射正确，Font Awesome 保留
-- [ ] `pnpm --filter tona-theme-simple build` 构建成功，产物 `dist/simple.js` 存在
-- [ ] 产物含 `navbarBurger`、`catalog-sticky`、`catalog-scroll-up`、`custom-links`、`.header-posttitle` 等关键字符串
-- [ ] inline CSS 含 simple 关键样式（`#catalog`、`.custom-links`、`.navbar-burger` 等）
+- [x] `themes/simple/` 完整结构就位（package.json + vite.config.ts + src/）
+- [x] main.js 用 `import.meta.glob` 注册模块 + 15 个插件 `.use()` 链
+- [x] 4 个自研模块（header/side/catalog/scroll）`install()` 就位，逻辑忠实迁移
+- [x] catalog 用 `getCatalogOptions` 取 enable，保留自研逻辑（不用新 catalog 插件）
+- [x] 样式迁移完整，plugins.scss 的 `@use ... with (...)` 映射正确，Font Awesome 保留
+- [x] `pnpm --filter tona-theme-simple build` 构建成功，产物 `dist/simple.js` 存在
+- [x] 产物含 `navbarBurger`、`catalog-sticky`、`catalog-scroll-up`、`custom-links`、`.header-posttitle` 等关键字符串
+- [x] inline CSS 含 simple 关键样式（`#catalog`、`.custom-links`、`.navbar-burger` 等）
 
 ## Comments
 
 Batch 2026-08-07: start — 00634ffe
+done — 9e3eec45 (build green: dist/simple.js 87.67 kB contains navbarBurger/catalog-sticky/catalog-scroll-up/custom-links/header-posttitle; inline CSS has #catalog/.custom-links/.navbar-burger; regression: string counts match 654fde48^ dist/simple.js exactly. Note: old shared style/reset.scss + hideAds.scss vendored into src/style/ with ./-relative imports — rendered CSS identical)
