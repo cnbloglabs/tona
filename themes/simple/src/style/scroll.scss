@@ -1,0 +1,29 @@
+@mixin scrollbar-simple($thumb-color) {
+    &::-webkit-scrollbar {
+        display: block;
+        margin-top: 105px;
+        width: 10px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $thumb-color;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: rgba(211, 210, 210, 0);
+    }
+}
+
+#cnblogs_post_body table,
+// body,
+.emoji-picker__emojis,
+
+pre,
+code {
+    @include scrollbar-simple(#a8a8a8);
+}
+
+#catalog {
+    @include scrollbar-simple(#d8d8d8);
+}

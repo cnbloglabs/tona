@@ -1,0 +1,61 @@
+// postSignature
+@use '/node_modules/tona-plugins/src/plugins/footer/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/license/index.scss' as * with (
+  $postSignature: (
+    primary: var(--themeColor),
+    background: var(--background-e),
+    borderRadius: 2px,
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/codeHighlight/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeCopy/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeLinenumbers/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/imagePreview/index.scss' as * with (
+  $imagebox: (
+    background: rgba(0, 0, 0, 0.5),
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/donation/index.scss' as * with (
+  $donation: (
+    btnColors: #10ac84,
+    qrcodeBackground: #fff,
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/emoji/index.scss' as * with (
+  $emoji: (
+    textEmojiColor: #666,
+    bg: #fff,
+    borderColor: #e1e1e1,
+    hoverBg: #f8f8f8,
+    hoverBorderColor: #140b0b,
+    fontEmojiSize: 14px,
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/musicPlayer/index.scss' as * with (
+  $player: (
+    bodyBackground: #fff,
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/postMessage/index.scss' as * with (
+  $postMessage: (
+    categoriesBackground: #ff6b6b,
+    tagsBackground: #22a6b3 #0097e6 #fbc531 #10ac84,
+    colorCategories: #fff,
+    colorTags: #333,
+    colorMessage: #999,
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/notice/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/signature/index.scss' as * with (
+  $signature: (
+    padding: 1rem 14px,
+    fontSize: 1em,
+  )
+);
+@use '/node_modules/tona-plugins/src/plugins/commentsAvatars/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/tools/index.scss' as * with (
+  $toolMenu: (
+    background: #fff,
+    color: #fff,
+  )
+);

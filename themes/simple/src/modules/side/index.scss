@@ -1,0 +1,53 @@
+// #sidebar_new {
+//     &::after {
+//         content: '123';
+//         display: block;
+//     }
+// }
+#sidebar_news h3::before {
+    content: '\f2bb';
+}
+
+#blog-calendar-title::before {
+    content: '\f274';
+}
+
+#sidebar_search h3::before {
+    content: '\f002';
+}
+
+#sidebar_shortcut h3::before {
+    content: '\f360';
+}
+
+#sidebar_recentposts h3::before {
+    content: '\f15c';
+}
+#sidebar_toptags h3::before {
+    content: '\f02c';
+}
+#sidebar_scorerank h3::before {
+    content: '\f1d8';
+}
+#sidebar_toptags h3::before {
+    content: '\f00b';
+}
+#sidebar_categories h3::before {
+    content: '\f00b';
+}
+#sidebar_postarchive h3::before {
+    content: '\f07c';
+}
+
+#sidebar_recentcomments h3::before {
+    content: '\f4ad';
+}
+#sidebar_topviewedposts h3::before {
+    content: '\f06e';
+}
+#sidebar_topcommentedposts h3::before {
+    content: '\f086';
+}
+#sidebar_topdiggedposts h3::before {
+    content: '\f164';
+}

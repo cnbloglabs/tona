@@ -1,0 +1,30 @@
+@media screen and (max-width: 1023px) {
+    #main {
+        padding: 0;
+        padding: 1.2rem 0.5rem 0;
+        #mainContent {
+            padding: 3rem 0;
+            margin-left: 0rem;
+        }
+        #sideBar {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #main {
+        padding: 3rem 0.5rem 0;
+        #mainContent {
+            padding: 1.2rem 0;
+        }
+        // #sideBar {
+        // }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .commentform {
+        margin-left: 0;
+    }
+}
