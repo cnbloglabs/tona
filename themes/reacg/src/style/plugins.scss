@@ -5,6 +5,9 @@
   )
 );
 @use '/node_modules/tona-plugins/src/plugins/clickEffects/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeCopy/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeHighlight/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeLinenumbers/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/codeTrafficLight/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/colorMode/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/commentsAvatars/index.scss' as *;
