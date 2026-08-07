@@ -1,6 +1,6 @@
 # 04 — mobileMenu 模块（移动端汉堡按钮）
 
-Status: open
+Status: done
 Blocked by: 01
 
 ## What to build
