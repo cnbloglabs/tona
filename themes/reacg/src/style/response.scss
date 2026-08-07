@@ -175,4 +175,90 @@
     width: 100%;
     height: 144.018px;
   }
+  #side-btn-wrap {
+    position: fixed;
+    bottom: 30px;
+    right: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-basic-75);
+    box-shadow: 1px 1px 6px var(--color-basic-75);
+    border-radius: 50%;
+    z-index: 20;
+    width: 40px;
+    height: 40px;
+  }
+
+  #custom-mobile-nav .icon {
+    width: 27px;
+    margin-left: 5px;
+    transform: rotate(90deg);
+  }
+
+  #side-btn {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  #side-btn-burger {
+    position: absolute;
+    background: var(--themeColor);
+    width: 100%;
+    height: 3px;
+    top: 50%;
+    right: 0;
+    // margin-top: -1px;
+    opacity: 1;
+    transition: all 0.2s ease-in-out;
+  }
+
+  #side-btn-burger:after,
+  #side-btn-burger:before {
+    margin: 0;
+    border-radius: 2px;
+    background: var(--themeColor);
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    content: '';
+    display: block;
+    transition: all 0.2s ease-in-out;
+  }
+
+  #side-btn-burger:before {
+    top: 6px;
+  }
+
+  #side-btn-burger:after {
+    bottom: 6px;
+  }
+
+  #side-btn.side-btn-active #side-btn-burger {
+    background: 0 0;
+  }
+
+  #side-btn.side-btn-active #side-btn-burger:before {
+    transition: all 0.2s;
+    transform: rotate(45deg);
+    top: 0;
+  }
+
+  #side-btn.side-btn-active #side-btn-burger:after,
+  #side-btn.side-btn-active #side-btn-burger:before {
+    transition: all 0.2;
+  }
+
+  #side-btn.side-btn-active #side-btn-burger:after {
+    transition: all 0.3s;
+    transform: rotate(-45deg);
+    bottom: 0;
+  }
+
+  #side-btn.side-btn-active #side-btn-burger:after,
+  #side-btn.side-btn-active #side-btn-burger:before {
+    transition: all 0.2s;
+  }
 }
