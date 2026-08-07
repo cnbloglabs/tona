@@ -9,7 +9,12 @@ import svgr from 'vite-plugin-svgr'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(
+      mode === 'production' ? 'production' : 'development',
+    ),
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -27,4 +32,4 @@ export default defineConfig({
       enabled: false,
     }),
   ],
-})
+}))
