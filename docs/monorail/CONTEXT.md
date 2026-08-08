@@ -39,3 +39,11 @@ Theme Dist 的一种形态：样式不单独输出 `.css`，由构建把 CSS 打
 ## File Hash
 
 Theme Dist JS 文件名中的内容哈希段（如 `geek.DOZM4b0L.js`）。`tona-vite` 的 `hash` 控制是否写入；默认开启。
+
+## Dependency Pre-bundling
+
+dev 模式下 Vite 启动时把模块图中真实 node_modules 依赖预先打包（rolldown/esbuild），浏览器直接加载预打包产物，避免运行时逐个发现导致整页刷新。主题目录无 `index.html`，默认扫描器找不到入口，需 `tona-vite` 用 `optimizeDeps.entries` 显式指定 Dev Scan Entry。对应 effort 见 `docs/monorail/tona-vite-deps-entries/`。
+
+## Dev Scan Entry
+
+Vite 依赖扫描器在 dev 启动时爬取依赖图的入口文件。`computeEntries` 优先级：`optimizeDeps.entries` → `build.rollupOptions.input` → 兜底 glob `**/*.html`。主题场景下由 `tona-vite` 注入 `optimizeDeps.entries` 指向 `src/main.(ts|js)`，使扫描器经 `pluginContainer.resolveId`（alias/插件链生效）发现全部真实依赖。
