@@ -21,11 +21,11 @@ if (!isPostDetailsPage()) {
   $('#mainContent')[0].style.display = 'block'
 }
 
-Object.values(import.meta.glob('./modules/**/*.js', { eager: true })).forEach(
-  (i) => {
+Object.values(import.meta.glob('./modules/**/*.js', { eager: true }))
+  .filter((m) => typeof m.install === 'function')
+  .forEach((i) => {
     i.install()
-  },
-)
+  })
 
 createTheme()
   .use(footer, { enable: true })

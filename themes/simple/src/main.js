@@ -18,11 +18,11 @@ import {
 } from 'tona-plugins'
 import './style/index.scss'
 
-Object.values(import.meta.glob('./modules/**/*.js', { eager: true })).forEach(
-  (i) => {
+Object.values(import.meta.glob('./modules/**/*.js', { eager: true }))
+  .filter((m) => typeof m.install === 'function')
+  .forEach((i) => {
     i.install()
-  },
-)
+  })
 
 createTheme()
   .use(colorMode, { enable: true })

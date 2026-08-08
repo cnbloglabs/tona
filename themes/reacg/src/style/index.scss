@@ -5,7 +5,6 @@
 @use './markdown.scss' as *;
 @use './plugins.scss' as *;
 @use './scroll.scss' as *;
-@use './response.scss' as *;
 
 html {
   font-family:
@@ -66,7 +65,6 @@ body {
     li a {
       @include center();
       height: 100%;
-      text-shadow: 4px 0 12px var(--themeColor);
       padding: 0 16px;
 
       &:hover {
@@ -456,10 +454,10 @@ body {
     }
 
     #commentform_title {
-      // padding: 12px 0;
-      // border-bottom: 1px solid var(--color-basic-400);
+      // padding: 12px 0;paddingpadding
+      // border-bottom: 1px solid var(--color-basic-400);border-bottomborder-bottom
       background: none;
-      // font-weight: 700;
+      // font-weight: 700;font-weightfont-weight
       margin-bottom: 0;
       padding: 7.56px 10.8px;
       border-bottom: 1px solid var(--color-basic-400);
@@ -496,7 +494,7 @@ body {
       }
 
       // .commentbox_title_left {
-      //     display: none;
+      //     display: none;displaydisplay
       // }
       .commentbox_footer {
         display: none;

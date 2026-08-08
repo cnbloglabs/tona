@@ -17,16 +17,20 @@ reacg 主题在 monorepo 迁移（提交 `654fde48`）时，`src/themes/reacg/` 
 从提交 `654fde48^` 恢复 5 类功能，迁入 reacg 主题现有结构，遵循 geek 主题的 `src/modules/**` + `export function install()` 约定。
 
 **新增模块**（放在 `themes/reacg/src/modules/`，与 geek 一致）：
+
 - `modules/icons/` —— iconfont 图标系统（`icons.js` + `index.js` + `index.scss`）
 - `modules/mobileMenu/` —— `#side-btn` 汉堡按钮
 - `modules/profile/` —— 侧边栏头像 + 信息
 - `modules/scroll/` —— 滚动隐藏导航
 
 **main.js 改动**：
+
 - 加入 `Object.values(import.meta.glob('./modules/**/*.js', { eager: true })).forEach((i) => i.install())`（对齐 geek 的模块注册方式）
+  - **注意**：glob 会匹配到 `modules/icons/icons.js`（图标定义表，无 `install` 导出），直接调用会抛 `TypeError: i.install is not a function`。因此 4 个主题的 main.js 均改为先 `.filter((m) => typeof m.install === 'function')` 再调用（与 `createThemeApi.ts` 的 `isFunction(plugin.install)` 防御风格一致）。
 - `.use()` 链补上 `codeHighlight` / `codeCopy` / `codeLinenumbers`
 
 **样式改动**：
+
 - `plugins.scss` 的 `@use` 列表补上 `codeHighlight` / `codeCopy` / `codeLinenumbers`
 - `index.scss` 补 `header-hide` 样式
 - `response.scss` 补 `side-btn` 移动端样式
