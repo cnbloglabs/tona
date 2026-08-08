@@ -15,7 +15,7 @@ reacg 主题在 monorepo 迁移（提交 654fde48）时丢失了 5 类功能。�
 
 - **图标资源只迁移 iconfont**：`//at.alicdn.com/t/font_1595820_xb2hu5wpss.js`。Font Awesome 不引入——旧 `style/icons.scss` 虽 import 了 FA CSS，但 `build/icons/` 全部用 iconfont SVG symbol，FA 那段 `*::before/*::after` 从未被实际使用（是其他皮肤的遗留）。geek 保留 FA 是因为它真用 `fa-` 类，reacg 不需要。
 - **iconfont 加载失败静默降级**：`loadScript(fontUrl, build)` 失败时不注入图标、无占位、无报错（沿用旧行为）。
-- **导航栏 friends 选择器修复**：旧 `sidebarWraps.friends = '#sidebar_links1065840'` 是写死的死链（几乎肯定不存在），会导致 `poll` 轮询 180s 超时。改为 `#sidebar_links`。
+- **导航栏 friends 选择器修复**：旧 `sidebarWraps.friends = '#sidebar_links1065840'` 是写死的死链（几乎肯定不存在），会导致 `poll` 轮询 180s 超时。改为 `[id^="sidebar_links"]` —— 博客园友情链接 widget 的 id 是博客专属的（模板为 `sidebar_links1978167`、旧 reacg 为 `sidebar_links1065840`），固定 `#sidebar_links` 匹配不到，需前缀匹配同时兼容两种情况。
 - **滚动隐藏导航完整迁移**：`header-hide` 样式补进 `index.scss`（`transform: translate3d(0,-100%,0)`）；`catalog-scroll-up` 样式已在 plugins.scss 保留，无需重复。滚动 JS 原样迁入。
 - **移动端菜单完整迁移**：`#side-btn` 注入逻辑 + `unpass()` 滚动锁定保留；`side-btn` 样式补进 `response.scss`（旧版桌面也构建按钮、靠 `@media` 隐藏，保留此行为）。
 - **三个代码插件接回**：`.use(codeHighlight)` / `.use(codeCopy)` / `.use(codeLinenumbers)` 加进 main.js；对应 scss 加进 plugins.scss 的 `@use` 列表。

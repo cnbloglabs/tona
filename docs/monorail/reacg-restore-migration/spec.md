@@ -51,7 +51,7 @@ reacg 主题在 monorepo 迁移（提交 `654fde48`）时，`src/themes/reacg/` 
 - **图标注入**：原样迁入 `build/icons/index.js` 的 `iconInSvg`/`setModeIcon`/`setSidebarIcon`/`setGitee`/`setGithub`/`setIndexPosttitleIcon`/`setIndexPostLookIcon`/`setEntrylistPosttitleIcon`/`setPostTitleIcon`/`nav`。`setIcons` 通过 `loadScript(fontUrl, build)` 加载 iconfont。
   - **已验证**：新 `darkMode` 插件（`packages/plugins/src/plugins/darkMode/index.js`）仍监听 `.mode-change` 点击，且用 `$('html').attr('theme', mode)` 设置模式。与旧 `setModeIcon` 的 `.mode-change` 选择器、`html[theme]` 读取完全兼容。`setModeIcon` 可原样迁移，无需改绑定逻辑；它与 darkMode 的 `.mode-change` 监听各自独立、不冲突（darkMode 只管 html[theme] + 代码主题，setModeIcon 只管图标替换）。
   - `setGitee`/`setGithub` 读取 `getGiteeOptions`/`getGithubOptions`（`tona-options` 已提供）。
-- **friends 选择器修复**：`sidebarWraps.friends` 从死链 `'#sidebar_links1065840'` 改为 `'#sidebar_links'`，避免 `poll` 无谓轮询 180s。
+- **friends 选择器修复**：`sidebarWraps.friends` 从死链 `'#sidebar_links1065840'` 改为 `'[id^="sidebar_links"]'`（博客园友情链接 widget 的 id 是博客专属的，如模板 `sidebar_links1978167`，需前缀匹配），避免 `poll` 无谓轮询 180s。
 - **profile**：`avatar` 从 `getThemeOptions().avatar` 取（`constants/cnblog.js` 已有 `avatar` 导出）；`custom-info` 使用 `constants/links.js` 的 `followersDetailsUrl`/`followingDetailsUrl`/`index`/`userDetails`（均已存在）；`hideFollowButton` 的 `isOwner()` 已存在。
 - **scroll**：`header-hide` 样式（`transform: translate3d(0,-100%,0)`）补进 `index.scss`；`catalog-scroll-up` 已在 `plugins.scss`，不重复。滚动 JS 用 `$(window).scroll` 原样迁入，方向判定逻辑保留。
 - **mobileMenu**：`#side-btn` 注入 + `unpass()` 滚动锁定保留；样式补进 `response.scss`。桌面端仍构建按钮、靠 `@media (max-width:767px)` 显示（沿用旧行为）。

@@ -58,10 +58,12 @@
 
 #sideBar {
   h3 {
+    display: flex;
+    align-items: center;
     .icon {
       margin-right: 5.4px;
-      width: 1.8em;
-      height: 1.8em;
+      width: 1.1em;
+      height: 1.1em;
     }
   }
 }
@@ -93,13 +95,14 @@
 }
 
 #navList {
-  .mode-change .icon {
-    width: 40px;
-    cursor: pointer;
-  }
   .custom-github .icon {
     width: 54px;
   }
+}
+
+.mode-change .icon {
+  width: 40px;
+  cursor: pointer;
 }
 
 .mode-change .icon {
@@ -114,7 +117,7 @@
 
 @media screen and (max-width: 767px) {
   .mode-change {
-    margin-left: 0 !important;
+    margin-left: auto !important;
   }
 }
 

@@ -21,7 +21,7 @@ function setModeIcon() {
   const darkIcon = iconInSvg(icons.dark)
   const lightIcon = iconInSvg(icons.light)
   const icon = isDark ? darkIcon : lightIcon
-  $('#navList').prepend(
+  $('#navigator').append(
     `<li class='mode-change ${isDark ? 'dark' : ''}'>${icon}</li>`,
   )
   $(document).on('click', '.mode-change', function () {
@@ -113,7 +113,9 @@ function setSidebarIcon() {
     topDig: '#topdigg_posts_wrap', //推荐排行
     album: '#sidebar_imagecategory',
     catalog: '#catalog', //文章目录
-    friends: '#sidebar_links', //友情链接
+    // 博客园友情链接 widget 的 id 是博客专属的（如 sidebar_links1978167），
+    // 需用前缀匹配以同时兼容固定 id `sidebar_links` 与带博客 id 后缀的情况
+    friends: '[id^="sidebar_links"]', //友情链接
   }
 
   const iconActions = [
@@ -215,11 +217,11 @@ function setIndexPosttitleIcon() {
 }
 
 /**
- * 设置首页列表查看更多按钮
+ * 设置首页/列表页「阅读全文」按钮（追加向右箭头图标）
  */
 function setIndexPostLookIcon() {
-  if (getCurrentPage() !== 'index') return
-  if ($('.day').length < 1) return
+  const page = getCurrentPage()
+  if (page !== 'index' && page !== 'list') return
   $('.c_b_p_desc_readmore').each(function () {
     $(this).append(iconInSvg(icons.look))
   })

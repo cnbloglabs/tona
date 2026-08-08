@@ -14,7 +14,7 @@ Blocked by: 01
 **适配改动（相对旧代码）**：
 
 - import 路径改为当前结构：`../../constants/cnblog`、`../../constants/links`、`../../utils/helpers`、`../../utils/cnblog`、`tona-options` 的 `getGiteeOptions`/`getGithubOptions`。注意当前 `utils/cnblog.js` 的 `getCurrentPage()` 已存在且逻辑一致。
-- **friends 死链修复**：`setSidebarIcon` 的 `sidebarWraps.friends` 从 `'#sidebar_links1065840'` 改为 `'#sidebar_links'`（旧链几乎必不存在，会导致 `poll` 轮询 180s）。
+- **friends 死链修复**：`setSidebarIcon` 的 `sidebarWraps.friends` 从 `'#sidebar_links1065840'` 改为 `'[id^="sidebar_links"]'`（旧链几乎必不存在，会导致 `poll` 轮询 180s；且博客园友情链接 widget 的 id 是博客专属的，如模板 `sidebar_links1978167`，固定 `#sidebar_links` 匹配不到，需前缀匹配）。
 - `setGitee`/`setGithub` 的 `getGiteeOptions()`/`getGithubOptions()` 需传 `devOptions`（若模块 `install(_, devOptions)` 能拿到则透传；否则从 `window.opts` 读取——与 `getThemeOptions().avatar` 同源）。
 
 **图标切换耦合（已验证兼容）**：新 `darkMode` 插件监听 `.mode-change` 点击 + `html[theme]` 属性，与旧 `setModeIcon` 的 `html[theme]` 读取和 `.mode-change` 替换图标逻辑一致，无需改绑定。
@@ -22,7 +22,7 @@ Blocked by: 01
 ## Acceptance criteria
 
 - [ ] `modules/icons/` 三文件就位，`index.js` 导出 `install()`
-- [ ] `setSidebarIcon` 的 friends 指向 `#sidebar_links`
+- [ ] `setSidebarIcon` 的 friends 指向 `[id^="sidebar_links"]`（前缀匹配，兼容博客专属 id）
 - [ ] iconfont 加载失败静默降级（无报错、无占位）
 - [ ] 构建成功；产物 `dist/reacg.js` 含 `at.alicdn.com` iconfont URL、`iconInSvg` 逻辑、`custom-gitee`/`custom-github`/`mode-change` 注入
 - [ ] 产物 inline CSS 含 `.icon` 尺寸样式（`build/icons/index.scss` 内容）
