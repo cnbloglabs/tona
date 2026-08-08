@@ -5,6 +5,7 @@
 reacg 主题在 monorepo 迁移（提交 654fde48）时丢失了 5 类功能。用户要全部修复，恢复皮肤原有的观感与行为。修复采用「方案 2」——从旧提交 `654fde48^` 恢复图标 iconfont 系统，而非简单引入 Font Awesome。
 
 丢失清单（对齐时确认，全修）：
+
 1. **图标系统** `build/icons/` + `style/icons.scss` —— iconfont SVG 注入 + `.icon` 样式
 2. **移动端菜单** `build/mobileMenu/` —— `#side-btn` 汉堡按钮注入 + 样式
 3. **侧边栏个人信息** `build/profile/` —— `custom-avatar` + `custom-info`（昵称/园龄/粉丝/关注）
