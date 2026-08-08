@@ -1,5 +1,17 @@
 # Domain glossary
 
+## Reacg Migration Loss
+
+reacg 主题在 monorepo 迁移（提交 654fde48）时丢失的 5 类功能：iconfont 图标系统、移动端菜单（`#side-btn`）、侧边栏个人信息（`custom-avatar`/`custom-info`）、滚动隐藏导航（`header-hide`）、三个代码插件（codeHighlight/codeCopy/codeLinenumbers）。对应 effort 见 `docs/monorail/reacg-restore-migration/`。
+
+## Legacy Theme Migration
+
+monorepo 迁移（提交 654fde48）时未迁入的旧主题补迁。仅 `simple`/`view` 两个（用户指定），其余 7 个（bilibili/bilibiliv1/csdn/demo/element/elementv1/silence）不迁。simple 保留自研 catalog（不用新 catalog 插件）；view 用新 catalog 插件。对应 effort 见 `docs/monorail/migrate-simple-view-themes/`。
+
+## Geek Migration Loss
+
+geek 主题在 monorepo 迁移（提交 654fde48）时丢失的 1 个模块逻辑 + 4 个代码插件：左下角 GitHub 按钮（`buildLeftsideBottomBtns`）、`codeHighlight`/`codeLinenumbers`/`codeCopy`/`codeLang`。对应 effort 见 `docs/monorail/geek-restore-migration/`。
+
 ## Live2D Mute
 
 live2d 插件 `live2d` 配置里的布尔键 `mute`（默认 `false`）：为 true 时模型互动照常触发动画，但播放 motion sound 的 audio 不发声。

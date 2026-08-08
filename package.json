@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node scripts/dev-theme.ts",
     "build:theme": "node scripts/build-theme.ts",
-    "build:pkg":"pnpm -F './packages/**' build",
+    "build:pkg": "pnpm -F './packages/**' build",
     "docs:dev": "pnpm -C docs run dev",
     "docs:build": "pnpm -C docs run build",
     "typecheck": "vue-tsc --noEmit",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "@clack/prompts": "catalog:",
     "@tailwindcss/typography": "catalog:",
-    "@tsdown/css": "^0.21.4",
+    "@tsdown/css": "^0.21.7",
     "@types/node": "catalog:",
     "bumpp": "catalog:",
     "picocolors": "catalog:",

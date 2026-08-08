@@ -1,5 +1,9 @@
 @mixin flex($direction: row, $inline: block) {
-  display: if($inline==block, flex, inline-block);
+  @if $inline==block {
+    display: flex;
+  } @else {
+    display: inline-block;
+  }
   flex-direction: $direction;
   flex-wrap: wrap;
 }
