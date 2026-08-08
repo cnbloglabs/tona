@@ -70,7 +70,6 @@ body {
       &:hover {
         background-color: var(--themeColor);
         color: #fff;
-        transition: all 0.3s;
       }
     }
   }
@@ -135,11 +134,6 @@ body {
     font-weight: 700;
     font-size: 18px;
     color: var(--color-basic-800);
-
-    &:hover {
-      transform: translateX(4px);
-      transition: all 0.2s;
-    }
   }
 
   .postCon {
@@ -190,11 +184,6 @@ body {
       font-size: 16px;
       text-shadow: 4px 0px 12px var(--themeColor);
       color: var(--color-basic-900);
-
-      &:hover {
-        transform: translateX(4px);
-        transition: all 0.2s;
-      }
     }
 
     .entrylistPostSummary {
@@ -561,6 +550,12 @@ body {
   }
 }
 
+// 评论输入框下方导航栏
+.under-comment-nav,
+.under-comment-box-nav {
+  display: none;
+}
+
 // 相册页、标签页
 .custom-gallery h3,
 .PostListTitle {
@@ -599,11 +594,6 @@ body {
     li {
       padding-top: 4px;
       font-size: 13px;
-
-      &:hover {
-        transform: translateX(4px);
-        transition: all 0.2s;
-      }
     }
   }
 }
@@ -673,7 +663,23 @@ body {
 }
 
 #sidebar_search {
+  // 站内搜索 + 谷歌搜索两个独立 widget 容器统一布局
+  #widget_my_zzk,
+  #widget_my_google {
+    display: flex;
+    align-items: center;
+    // 博客园搜索框 HTML 含 &nbsp; 空白节点，会生成匿名 flex item 破坏布局，置零字号消除其占位
+    font-size: 0;
+
+    .input_my_zzk,
+    .btn_my_zzk {
+      font-size: 13px; // 恢复字号
+    }
+  }
+
   .input_my_zzk {
+    flex: 1 1 0%;
+    width: auto;
     padding: 0 3px;
     border: 1px solid var(--themeColor);
     background: var(--color-basic-50);
@@ -681,8 +687,15 @@ body {
     color: var(--color-basic-900);
   }
 
+  // 找找看、谷歌搜索按钮统一等宽
   .btn_my_zzk {
+    // 覆盖博客园默认的 absolute 定位搜索图标样式（width: 25px / color: transparent）
+    position: static;
+    flex: 0 0 auto;
+    width: 76px;
+    margin-left: 8px; // 与输入框的间距（用 margin 而非 gap：&nbsp; 是匿名 flex item，gap 会翻倍）
     border: none;
+    border-radius: 4px;
     background: var(--themeColor);
     color: #fff;
     outline: none;
@@ -941,10 +954,6 @@ body {
     color: var(--themeColor);
     transition: all 0.2s;
   }
-}
-
-.comment_actions {
-  border-bottom: 1px solid var(--themeColor);
 }
 
 .comment_vote a {
