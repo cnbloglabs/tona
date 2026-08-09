@@ -40,12 +40,16 @@ jobs:
           pnpm --dir themes/geek build
           pnpm --dir themes/reacg build
           pnpm --dir themes/shadcn build
+          pnpm --dir themes/simple build
+          pnpm --dir themes/view build
 
       - name: Package theme assets
         run: |
-          zip -j geek.zip themes/geek/dist/*
-          zip -j reacg.zip themes/reacg/dist/*
-          zip -j shadcn.zip themes/shadcn/dist/*
+          zip -j geek.zip themes/geek/dist/geek.min.js themes/geek/dist/geek.min.css
+          zip -j reacg.zip themes/reacg/dist/reacg.min.js themes/reacg/dist/reacg.min.css
+          zip -j shadcn.zip themes/shadcn/dist/shadcn.min.js themes/shadcn/dist/shadcn.min.css
+          zip -j simple.zip themes/simple/dist/simple.min.js themes/simple/dist/simple.min.css
+          zip -j view.zip themes/view/dist/view.min.js themes/view/dist/view.min.css
 
       - name: Publish to npm
         run: npm i -g npm@^11.5.2 && pnpm run publish-ci ${{ github.ref_name }}
@@ -56,6 +60,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload theme assets
-        run: gh release upload ${{ github.ref_name }} geek.zip reacg.zip shadcn.zip --clobber
+        run: gh release upload ${{ github.ref_name }} geek.zip reacg.zip shadcn.zip simple.zip view.zip --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
