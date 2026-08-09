@@ -30,7 +30,11 @@ Collapsed Sidebar 下挂在 `#cnblog-nav` 末尾 `fa-link` 图标上的浮层：
 
 ## Theme Dist
 
-主题经 `tona-vite` 构建后的可分发产物目录（通常为 `dist/`）。默认形态为带 File Hash 的 IIFE JS + 独立 CSS；可选 Inline CSS Dist。
+主题经 `tona-vite` 构建后的可分发产物目录（通常为 `dist/`）。默认形态为带 File Hash 的 IIFE JS + 独立 CSS；可选 Inline CSS Dist。GitHub Release 产物契约（ADR-002）为无 hash 双文件 `{themeName}.min.js` + `{themeName}.min.css`。
+
+## Release Theme Artifacts
+
+GitHub Release 上随 `v*` tag 发布、供博客用户直接下载使用的主题产物：5 个主题（geek/reacg/shadcn/simple/view）各一个 zip，内含稳定命名的 `{themeName}.min.js` + `{themeName}.min.css`（无 hash、CSS 独立、zip 扁平无说明文档）。对应 ADR-002。
 
 ## Inline CSS Dist
 
