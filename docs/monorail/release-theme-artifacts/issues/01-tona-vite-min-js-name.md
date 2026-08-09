@@ -1,7 +1,12 @@
 # 01 — tona-vite: `hash` 默认 `false` + 新增 `sourcemap` 默认 `false`，输出 `{themeName}.min.js`
 
-- Status: claimed
+- Status: done
 - Blocked by: None
+
+## Comments
+
+Batch 2026-08-10: start — f9ef9afa
+done — 4f6037d6 (hash 默认 false + sourcemap 选项 + {themeName}.min.js 输出名；theme-dist.test.ts 5 用例全绿)
 
 ## What to build
 
