@@ -1,7 +1,12 @@
 # 02 — 5 主题 vite.config.ts 最小化：仅保留 `themeName`
 
-- Status: claimed
+- Status: done
 - Blocked by: 01
+
+## Comments
+
+Batch 2026-08-10: start — f9ef9afa
+done — d39d33ce (geek/reacg/simple/view 收敛为仅 themeName，保留 simple/view 的 scss silenceDeprecations 块；shadcn 零改动；5 主题构建验证 dist 恰为 xx.min.js + xx.min.css)
 
 ## What to build
 
