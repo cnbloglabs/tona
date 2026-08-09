@@ -12,10 +12,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    tona({
-      themeName: 'simple',
-      inlineCss: true,
-      hash: false,
-    }),
+    tona({ themeName: 'simple' }),
   ],
 })

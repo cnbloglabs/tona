@@ -12,10 +12,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    tona({
-      themeName: 'view',
-      inlineCss: true,
-      hash: false,
-    }),
+    tona({ themeName: 'view' }),
   ],
 })
