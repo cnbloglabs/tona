@@ -29,16 +29,21 @@ export interface TonaPluginOptions {
   inlineCss?: boolean
   /**
    * When true, include a content hash in the JS filename.
-   * @default true
+   * @default false
    */
   hash?: boolean
+  /**
+   * When true, emit a sourcemap alongside the build output.
+   * @default false
+   */
+  sourcemap?: boolean
 }
 
 /**
  * Vite plugin for Tona themes - combines dynamic script extension and shared assets serving
  */
 export default function tona(options: TonaPluginOptions = {}): Plugin {
-  const { themeName = 'theme', inlineCss = false, hash = true } = options
+  const { themeName = 'theme', inlineCss = false, hash = false, sourcemap = false } = options
 
   // Default path to shared assets
   const assetsPath = path.join(__dirname, '..', 'public')
@@ -65,7 +70,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
 
       const jsFileName = hash
         ? () => `${themeName}.[hash].js`
-        : () => `${themeName}.js`
+        : () => `${themeName}.min.js`
 
       const existingLib = config.build?.lib
       const libConfig =
@@ -107,6 +112,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
         build: {
           cssCodeSplit: buildConfig.cssCodeSplit ?? inlineCss,
           lib: libConfig,
+          sourcemap,
           ...(bundlerOptions ? { rolldownOptions: bundlerOptions } : {}),
         },
       }
