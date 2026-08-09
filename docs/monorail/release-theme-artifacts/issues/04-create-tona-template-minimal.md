@@ -1,7 +1,12 @@
 # 04 — create-tona: template-preact 最小化，移除自定义产物配置
 
-- Status: claimed
+- Status: done
 - Blocked by: 01
+
+## Comments
+
+Batch 2026-08-10: start — f9ef9afa
+done — c7310367 (template-preact 收敛为 resolve.alias + dedupe + 插件三行最小形态，移除 define/server/build.lib 等；README 删除 8081；静态验证通过，未实际 install build 因模板锁 latest tona-vite)
 
 ## What to build
 
