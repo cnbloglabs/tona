@@ -1,7 +1,12 @@
 # 03 — publish.yml 构建/打包/上传扩展到 5 主题
 
-- Status: claimed
+- Status: done
 - Blocked by: 02
+
+## Comments
+
+Batch 2026-08-10: start — f9ef9afa
+done — 150ef740 (Build/Package/Upload 扩到 5 主题；zip 显式列两文件；yaml 解析通过；/tmp 干跑 unzip -l 验证每 zip 恰含两文件)
 
 ## What to build
 
