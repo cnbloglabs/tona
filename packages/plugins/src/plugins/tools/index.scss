@@ -48,7 +48,9 @@ $color: map.get($toolMenu, color);
     }
   }
   .tooltip {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 8px);
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -62,11 +64,15 @@ $color: map.get($toolMenu, color);
     white-space: nowrap;
     pointer-events: none;
     visibility: hidden;
-    transform: translateY(-31px);
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.2s;
     z-index: 9;
     &:after {
       position: absolute;
-      right: -5px;
+      top: 50%;
+      right: -6px;
+      transform: translateY(-50%);
       content: '';
       width: 0;
       height: 0;
@@ -79,8 +85,7 @@ $color: map.get($toolMenu, color);
   &:hover {
     .tooltip {
       visibility: visible;
-      transform: translate(-50px, -31px);
-      transition: transform 0.2s;
+      opacity: 1;
     }
   }
   &:active {
