@@ -109,6 +109,42 @@ theme.use(codeHighlight)
 | `license`  | License display      |
 | `webTag`   | Website tags         |
 
+## darkMode Plugin
+
+Dark mode toggle with three modes: **dark / light / follow system**:
+
+```typescript
+import { darkMode } from 'tona-plugins'
+
+theme.use(darkMode, {
+  enable: true,
+  darkDefault: false, // default dark when no local preference
+  followSystem: false, // default to system light/dark when no local preference
+})
+```
+
+The `.mode-change` button in the toolbar cycles through the three modes (dark → light → follow system), and the selection is persisted to `localStorage.modeType`. In follow-system mode, the page listens to the OS `prefers-color-scheme` changes and switches in real time.
+
+Button icons and tooltips are customizable:
+
+```typescript
+theme.use(darkMode, {
+  enable: true,
+  followSystem: true,
+  iconType: 'className', // 'className' | 'html'
+  icons: {
+    dark: 'fa-moon',
+    light: 'fa-sun',
+    system: 'fa-adjust',
+  },
+  tooltips: {
+    dark: 'Dark',
+    light: 'Light',
+    system: 'Follow system',
+  },
+})
+```
+
 ## Plugin Configuration
 
 Each plugin accepts configuration options:

@@ -109,6 +109,42 @@ theme.use(codeHighlight)
 | `license`  | 许可证显示 |
 | `webTag`   | 网站标签   |
 
+## darkMode 插件
+
+暗黑模式切换，支持**深色 / 浅色 / 跟随系统**三种模式：
+
+```typescript
+import { darkMode } from 'tona-plugins'
+
+theme.use(darkMode, {
+  enable: true,
+  darkDefault: false, // 无本地记录时默认深色
+  followSystem: false, // 无本地记录时默认跟随系统深色/浅色
+})
+```
+
+工具栏的 `.mode-change` 按钮会在三种模式间循环切换（深色 → 浅色 → 跟随系统），选择会持久化到 `localStorage.modeType`。跟随系统模式下，页面会监听操作系统 `prefers-color-scheme` 的变化并实时切换。
+
+按钮图标与提示文字支持自定义：
+
+```typescript
+theme.use(darkMode, {
+  enable: true,
+  followSystem: true,
+  iconType: 'className', // 'className' | 'html'
+  icons: {
+    dark: 'fa-moon',
+    light: 'fa-sun',
+    system: 'fa-adjust',
+  },
+  tooltips: {
+    dark: '深色',
+    light: '浅色',
+    system: '跟随系统',
+  },
+})
+```
+
 ## 插件配置
 
 每个插件都接受配置选项：

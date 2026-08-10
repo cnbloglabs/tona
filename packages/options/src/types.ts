@@ -101,8 +101,7 @@ interface LockScreenOptions {
 interface DarkModeOptions {
   enable: boolean
   darkDefault: boolean
-  autoDark: boolean
-  autoLight: boolean
+  followSystem: boolean
 }
 interface MusicPlayerOptions {
   enable: boolean

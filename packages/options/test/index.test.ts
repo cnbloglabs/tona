@@ -613,8 +613,7 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: false,
         darkDefault: false,
-        autoDark: false,
-        autoLight: false,
+        followSystem: false,
       })
     })
 
@@ -631,8 +630,24 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: true,
         darkDefault: true,
-        autoDark: false,
-        autoLight: false,
+        followSystem: false,
+      })
+    })
+
+    it('应该支持跟随系统模式配置', () => {
+      window.opts = {
+        mode: {
+          enable: true,
+          followSystem: true,
+        },
+      }
+
+      const options = getDarkModeOptions()
+
+      expect(options).toEqual({
+        enable: true,
+        darkDefault: false,
+        followSystem: true,
       })
     })
   })
