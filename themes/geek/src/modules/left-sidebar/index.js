@@ -163,13 +163,13 @@ function removeHeaderToLeftSidebar(links) {
       icon: 'fa-pen-square',
       title: '新随笔',
       url: newPost,
-      allowVisit: true,
+      allowVisit: false,
     },
     {
       icon: 'fa-paper-plane',
       title: '草稿箱',
       url: draftBox,
-      allowVisit: true,
+      allowVisit: false,
     },
     {
       icon: 'fa-envelope',
