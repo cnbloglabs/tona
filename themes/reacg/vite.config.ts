@@ -3,8 +3,6 @@ import { defineConfig } from 'vite-plus'
 
 export default defineConfig({
   plugins: [
-    tona({
-      themeName: 'reacg',
-    }),
+    tona({ themeName: 'reacg' }),
   ],
 })

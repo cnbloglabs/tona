@@ -1,0 +1,24 @@
+{
+  "name": "tona-theme-simple",
+  "private": true,
+  "license": "MIT",
+  "author": "guangzan",
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev",
+    "build": "vp build"
+  },
+  "dependencies": {
+    "tona": "workspace:*",
+    "tona-options": "workspace:*",
+    "tona-plugins": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/jquery": "catalog:",
+    "@types/node": "catalog:",
+    "sass": "catalog:",
+    "terser": "catalog:",
+    "tona-vite": "workspace:*",
+    "vite": "catalog:"
+  }
+}

@@ -2,7 +2,13 @@ import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-import type { LibraryFormats, Plugin, UserConfig, ViteDevServer } from 'vite'
+import type {
+  ConfigEnv,
+  LibraryFormats,
+  Plugin,
+  UserConfig,
+  ViteDevServer,
+} from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -23,16 +29,21 @@ export interface TonaPluginOptions {
   inlineCss?: boolean
   /**
    * When true, include a content hash in the JS filename.
-   * @default true
+   * @default false
    */
   hash?: boolean
+  /**
+   * When true, emit a sourcemap alongside the build output.
+   * @default false
+   */
+  sourcemap?: boolean
 }
 
 /**
  * Vite plugin for Tona themes - combines dynamic script extension and shared assets serving
  */
 export default function tona(options: TonaPluginOptions = {}): Plugin {
-  const { themeName = 'theme', inlineCss = false, hash = true } = options
+  const { themeName = 'theme', inlineCss = false, hash = false, sourcemap = false } = options
 
   // Default path to shared assets
   const assetsPath = path.join(__dirname, '..', 'public')
@@ -41,7 +52,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
   return {
     name: 'vite-plugin-tona',
 
-    config(config: UserConfig): UserConfig {
+    config(config: UserConfig, env: ConfigEnv): UserConfig {
       // Check main.ts first, then main.js
       const tsPath = path.resolve(baseDir, 'src/main.ts')
       const jsPath = path.resolve(baseDir, 'src/main.js')
@@ -59,7 +70,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
 
       const jsFileName = hash
         ? () => `${themeName}.[hash].js`
-        : () => `${themeName}.js`
+        : () => `${themeName}.min.js`
 
       const existingLib = config.build?.lib
       const libConfig =
@@ -89,7 +100,7 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
       const bundlerOptions =
         buildConfig.rolldownOptions ?? buildConfig.rollupOptions
 
-      return {
+      const result: UserConfig = {
         css: {
           preprocessorOptions: {
             scss: {
@@ -101,9 +112,31 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
         build: {
           cssCodeSplit: buildConfig.cssCodeSplit ?? inlineCss,
           lib: libConfig,
+          sourcemap,
           ...(bundlerOptions ? { rolldownOptions: bundlerOptions } : {}),
         },
       }
+
+      // Dev only: point the dependency scanner at the theme entry so all
+      // node_modules deps are pre-bundled at cold start, instead of being
+      // discovered at runtime ("new dependencies optimized" + full reload).
+      // Theme dirs have no index.html for the scanner to crawl.
+      if (env.command === 'serve') {
+        // Respect explicit user entries — merge would replace arrays.
+        const userEntries = config.optimizeDeps?.entries
+        if (userEntries == null) {
+          const relativeEntry = path
+            .relative(config.root ?? process.cwd(), resolvedEntryPath)
+            .split(path.sep)
+            .join('/')
+          result.optimizeDeps = {
+            ...config.optimizeDeps,
+            entries: [relativeEntry],
+          }
+        }
+      }
+
+      return result
     },
 
     transformIndexHtml(html) {

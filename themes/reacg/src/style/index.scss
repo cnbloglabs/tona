@@ -5,7 +5,6 @@
 @use './markdown.scss' as *;
 @use './plugins.scss' as *;
 @use './scroll.scss' as *;
-@use './response.scss' as *;
 
 html {
   font-family:
@@ -39,7 +38,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  padding-left: 15vw;
+  padding: 0 20px;
   height: 54px;
   background: var(--color-basic-50);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -55,6 +54,7 @@ body {
 
   #navigator {
     @include center();
+    width: 100%;
     height: 100%;
     color: var(--color-basic-900);
   }
@@ -62,19 +62,24 @@ body {
   #navList {
     display: flex;
     height: auto;
+    justify-content: flex-start;
 
     li a {
       @include center();
       height: 100%;
-      text-shadow: 4px 0 12px var(--themeColor);
       padding: 0 16px;
 
       &:hover {
         background-color: var(--themeColor);
         color: #fff;
-        transition: all 0.3s;
       }
     }
+  }
+
+  // 深色/浅色切换按钮：位于 navigator 末尾，靠右展示
+  .mode-change {
+    margin-left: auto;
+    list-style: none;
   }
 
   .blogStats {
@@ -90,6 +95,12 @@ body {
       padding: 0 16px;
     }
   }
+}
+
+// 滚动隐藏导航：向下滚动隐藏头部导航
+#header.header-hide {
+  transform: translate3d(0, -100%, 0);
+  transition: all 0.2s;
 }
 
 #main {
@@ -131,11 +142,6 @@ body {
     font-weight: 700;
     font-size: 18px;
     color: var(--color-basic-800);
-
-    &:hover {
-      transform: translateX(4px);
-      transition: all 0.2s;
-    }
   }
 
   .postCon {
@@ -176,41 +182,116 @@ body {
     &:not(:first-of-type) {
       border-top: 1px solid hsla(0, 0%, 59.2%, 0.1);
     }
+
+    // 分类页内层标题常为空，避免渲染出多余的空白条
+    &:empty {
+      display: none;
+    }
   }
 
   .entrylistItem {
+    padding: 16px 12px;
+    border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
     .entrylistPosttitle {
-      padding: 4px 12px;
       @include text-over();
       font-weight: 700;
-      font-size: 16px;
-      text-shadow: 4px 0px 12px var(--themeColor);
-      color: var(--color-basic-900);
+      font-size: 18px;
+      color: var(--color-basic-800);
 
-      &:hover {
-        transform: translateX(4px);
-        transition: all 0.2s;
+      .entrylistItemTitle {
+        color: inherit;
       }
     }
 
     .entrylistPostSummary {
       .c_b_p_desc {
+        margin-top: 4px;
         color: var(--color-basic-800);
+        font-size: 14px;
+        line-height: 1.8em;
 
         .c_b_p_desc_readmore {
-          margin-top: 4px;
-          padding: 2.7px 4px 2.7px 8.1px;
-          border: 1px solid var(--themeColor);
+          margin-left: 8px;
+          padding: 0;
           color: var(--themeColor);
-          border-radius: 2px;
+          white-space: nowrap;
         }
       }
     }
 
     .entrylistItemPostDesc {
-      padding: 4px 12px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px 10px;
+      margin-top: 8px;
       color: var(--color-basic-600);
+      font-size: 13px;
+
+      a[rel='nofollow'] {
+        margin-left: auto;
+        color: var(--color-basic-600);
+        transition: color 0.2s;
+
+        &:hover {
+          color: var(--themeColor);
+        }
+      }
     }
+  }
+}
+
+// 分类/标签/档案 列表页 forFlow 顶层内容（页面标题 + 分页器）
+.forFlow {
+  > .entrylistTitle {
+    padding: 12px 16px;
+    border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
+    color: var(--color-basic-800);
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  // 隐藏顶部重复的分页器（列表底部已有一个）
+  > .pager:nth-child(2) {
+    display: none;
+  }
+
+  > .pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+    color: var(--color-basic-900);
+
+    a,
+    .current {
+      padding: 2px 12px;
+      border: 1px solid var(--themeColor);
+      border-radius: 2px;
+      color: var(--color-basic-900);
+      transition: all 0.2s;
+    }
+
+    .current {
+      background-color: var(--themeColor);
+      color: #fff;
+    }
+
+    a:hover {
+      color: var(--themeColor);
+      filter: brightness(0.9);
+    }
+  }
+
+  // 隐藏空容器与分隔元素
+  .entrylistDescription,
+  .postSeparator {
+    display: none;
   }
 }
 
@@ -450,10 +531,10 @@ body {
     }
 
     #commentform_title {
-      // padding: 12px 0;
-      // border-bottom: 1px solid var(--color-basic-400);
+      // padding: 12px 0;paddingpadding
+      // border-bottom: 1px solid var(--color-basic-400);border-bottomborder-bottom
       background: none;
-      // font-weight: 700;
+      // font-weight: 700;font-weightfont-weight
       margin-bottom: 0;
       padding: 7.56px 10.8px;
       border-bottom: 1px solid var(--color-basic-400);
@@ -490,7 +571,7 @@ body {
       }
 
       // .commentbox_title_left {
-      //     display: none;
+      //     display: none;displaydisplay
       // }
       .commentbox_footer {
         display: none;
@@ -557,6 +638,12 @@ body {
   }
 }
 
+// 评论输入框下方导航栏
+.under-comment-nav,
+.under-comment-box-nav {
+  display: none;
+}
+
 // 相册页、标签页
 .custom-gallery h3,
 .PostListTitle {
@@ -583,7 +670,8 @@ body {
 
   h3 {
     padding: 8px 12px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: normal;
     border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
   }
 
@@ -595,11 +683,6 @@ body {
     li {
       padding-top: 4px;
       font-size: 13px;
-
-      &:hover {
-        transform: translateX(4px);
-        transition: all 0.2s;
-      }
     }
   }
 }
@@ -669,7 +752,23 @@ body {
 }
 
 #sidebar_search {
+  // 站内搜索 + 谷歌搜索两个独立 widget 容器统一布局
+  #widget_my_zzk,
+  #widget_my_google {
+    display: flex;
+    align-items: center;
+    // 博客园搜索框 HTML 含 &nbsp; 空白节点，会生成匿名 flex item 破坏布局，置零字号消除其占位
+    font-size: 0;
+
+    .input_my_zzk,
+    .btn_my_zzk {
+      font-size: 13px; // 恢复字号
+    }
+  }
+
   .input_my_zzk {
+    flex: 1 1 0%;
+    width: auto;
     padding: 0 3px;
     border: 1px solid var(--themeColor);
     background: var(--color-basic-50);
@@ -677,8 +776,15 @@ body {
     color: var(--color-basic-900);
   }
 
+  // 找找看、谷歌搜索按钮统一等宽
   .btn_my_zzk {
+    // 覆盖博客园默认的 absolute 定位搜索图标样式（width: 25px / color: transparent）
+    position: static;
+    flex: 0 0 auto;
+    width: 76px;
+    margin-left: 8px; // 与输入框的间距（用 margin 而非 gap：&nbsp; 是匿名 flex item，gap 会翻倍）
     border: none;
+    border-radius: 4px;
     background: var(--themeColor);
     color: #fff;
     outline: none;
@@ -937,10 +1043,6 @@ body {
     color: var(--themeColor);
     transition: all 0.2s;
   }
-}
-
-.comment_actions {
-  border-bottom: 1px solid var(--themeColor);
 }
 
 .comment_vote a {

@@ -1,0 +1,103 @@
+#catalog {
+    max-height: 550px;
+    width: 15.5vw;
+    font-size: 14px;
+    overflow-y: scroll；;
+    overflow-x: hidden;
+    word-wrap: nowrap;
+    text-overflow: ellipsis;
+    border-radius: 2px;
+    // z-index: 20;
+    h3 {
+        &::before {
+            content: '\f022';
+        }
+    }
+    .catalog-title {
+        display: flex;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        padding: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        user-select: none;
+        &::after {
+            content: '\f107';
+            font-weight: 700;
+            display: inline-block;
+        }
+        &.is-active::after {
+            transform: rotate(180deg);
+            transform-origin: center;
+            transition-duration: 86ms;
+            transition-property: transform;
+        }
+    }
+    ul {
+        padding: 10.098px 14.418px;
+        .h1-list {
+            font-weight: 700;
+        }
+        .h1-list ~ .h2-list {
+            margin-left: 0.7em;
+        }
+        .h2-list ~ .h3-list {
+            margin-left: 1.4em;
+        }
+        li {
+            margin-top: 3.618px;
+            &:hover {
+                font-weight: 700;
+            }
+            a {
+                display: inline-block;
+                user-select: none;
+                width: 100%;
+                .icon {
+                    width: 1.2em;
+                    height: 1.8em;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+.catalog-active {
+    background: #3273dc;
+    padding: 5.4px 5.4px;
+    border-radius: 3px;
+    transition: background 0.3s;
+    color: #fff;
+    font-weight: 600;
+}
+.catalog-sticky {
+    position: fixed;
+    top: 64.8px;
+    visibility: visible;
+    transition: top 0.2s;
+    .catalog-title,
+    ul {
+        background-color: #fff;
+    }
+    h3::before {
+        display: none;
+    }
+    .catalog-title {
+        display: flex;
+        align-items: center;
+        &::before {
+            content: '\f004';
+            color: #f14668;
+            font-weight: 700;
+        }
+    }
+}
+.catalog-scroll-up {
+    top: 4rem;
+}
+.catalog-scroll-down {
+    top: 6rem;
+}

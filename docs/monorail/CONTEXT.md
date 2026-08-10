@@ -1,5 +1,21 @@
 # Domain glossary
 
+## Reacg Migration Loss
+
+reacg 主题在 monorepo 迁移（提交 654fde48）时丢失的 5 类功能：iconfont 图标系统、移动端菜单（`#side-btn`）、侧边栏个人信息（`custom-avatar`/`custom-info`）、滚动隐藏导航（`header-hide`）、三个代码插件（codeHighlight/codeCopy/codeLinenumbers）。对应 effort 见 `docs/monorail/reacg-restore-migration/`。
+
+## Legacy Theme Migration
+
+monorepo 迁移（提交 654fde48）时未迁入的旧主题补迁。仅 `simple`/`view` 两个（用户指定），其余 7 个（bilibili/bilibiliv1/csdn/demo/element/elementv1/silence）不迁。simple 保留自研 catalog（不用新 catalog 插件）；view 用新 catalog 插件。对应 effort 见 `docs/monorail/migrate-simple-view-themes/`。
+
+## Geek Migration Loss
+
+geek 主题在 monorepo 迁移（提交 654fde48）时丢失的 1 个模块逻辑 + 4 个代码插件：左下角 GitHub 按钮（`buildLeftsideBottomBtns`）、`codeHighlight`/`codeLinenumbers`/`codeCopy`/`codeLang`。对应 effort 见 `docs/monorail/geek-restore-migration/`。
+
+## Live2D Mute
+
+live2d 插件 `live2d` 配置里的布尔键 `mute`（默认 `false`）：为 true 时模型互动照常触发动画，但播放 motion sound 的 audio 不发声。
+
 ## Custom Links
 
 用户通过主题配置 `links` 提供的外链列表（`name` + `link`）。宽屏下以侧边栏文字列表呈现；收起态下通过 Custom Links Popover 呈现。
@@ -14,7 +30,11 @@ Collapsed Sidebar 下挂在 `#cnblog-nav` 末尾 `fa-link` 图标上的浮层：
 
 ## Theme Dist
 
-主题经 `tona-vite` 构建后的可分发产物目录（通常为 `dist/`）。默认形态为带 File Hash 的 IIFE JS + 独立 CSS；可选 Inline CSS Dist。
+主题经 `tona-vite` 构建后的可分发产物目录（通常为 `dist/`）。默认形态为带 File Hash 的 IIFE JS + 独立 CSS；可选 Inline CSS Dist。GitHub Release 产物契约（ADR-002）为无 hash 双文件 `{themeName}.min.js` + `{themeName}.min.css`。
+
+## Release Theme Artifacts
+
+GitHub Release 上随 `v*` tag 发布、供博客用户直接下载使用的主题产物：5 个主题（geek/reacg/shadcn/simple/view）各一个 zip，内含稳定命名的 `{themeName}.min.js` + `{themeName}.min.css`（无 hash、CSS 独立、zip 扁平无说明文档）。对应 ADR-002。
 
 ## Inline CSS Dist
 
@@ -23,3 +43,11 @@ Theme Dist 的一种形态：样式不单独输出 `.css`，由构建把 CSS 打
 ## File Hash
 
 Theme Dist JS 文件名中的内容哈希段（如 `geek.DOZM4b0L.js`）。`tona-vite` 的 `hash` 控制是否写入；默认开启。
+
+## Dependency Pre-bundling
+
+dev 模式下 Vite 启动时把模块图中真实 node_modules 依赖预先打包（rolldown/esbuild），浏览器直接加载预打包产物，避免运行时逐个发现导致整页刷新。主题目录无 `index.html`，默认扫描器找不到入口，需 `tona-vite` 用 `optimizeDeps.entries` 显式指定 Dev Scan Entry。对应 effort 见 `docs/monorail/tona-vite-deps-entries/`。
+
+## Dev Scan Entry
+
+Vite 依赖扫描器在 dev 启动时爬取依赖图的入口文件。`computeEntries` 优先级：`optimizeDeps.entries` → `build.rollupOptions.input` → 兜底 glob `**/*.html`。主题场景下由 `tona-vite` 注入 `optimizeDeps.entries` 指向 `src/main.(ts|js)`，使扫描器经 `pluginContainer.resolveId`（alias/插件链生效）发现全部真实依赖。

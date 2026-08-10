@@ -13,7 +13,7 @@ interface Lrc {
   type: 1 | 3
   color: string
 }
-interface Link {
+export interface Link {
   name: string
   link: string
 }
@@ -84,6 +84,14 @@ interface ImagePreviewOptions {
 }
 interface Live2dOptions {
   enable: boolean
+  page: Page
+  agent: 'pc' | 'phone' | 'all'
+  model: string
+  width: number
+  height: number
+  position: 'left' | 'right'
+  gap: string
+  mute: boolean
 }
 interface LockScreenOptions {
   enable: boolean

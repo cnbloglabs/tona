@@ -1,0 +1,106 @@
+@media screen and (max-width: 1366px) {
+    .day {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 1140px) {
+    .day {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1058px) {
+    #sideBar {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #mainContent {
+        display: block;
+        padding: 1em;
+        overflow: hidden;
+    }
+
+    #catalog {
+        display: none;
+    }
+
+    #myposts {
+        margin-left: 0;
+        .PostList {
+            /* item */
+            width: 100%;
+            margin-right: 0;
+        }
+    }
+
+    .entrylistItem {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #home #main {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .postDesc {
+        font-size: 0;
+        span {
+            font-size: 14px;
+        }
+    }
+}
+
+// @media screen and (max-width: 1024px) {
+//     #main {
+//         padding: 0;
+//         #mainContent {
+//             width: 100%;
+//             // padding: 3rem;
+//             // margin-left: 0rem;
+//             border-left: none;
+//             #myposts {
+//                 padding: 0.5rem;
+
+//                 flex-direction: column;
+//             }
+//             .PostList {
+//                 width: auto;
+//                 margin-left: 0;
+//                 margin-right: 0;
+//             }
+//             .custom-card {
+//                 width: 50%;
+//             }
+//             .custom-card:nth-child(1) {
+//                 width: 100%;
+//             }
+//         }
+//     }
+
+//     .topicListFooter {
+//         margin-left: 0;
+//         margin-right: 0;
+//     }
+
+//     #blog-comments-placeholder,
+//     #comment_form,
+//     #post_detail {
+//         padding: 1rem;
+//         // background-color: #fff;
+//     }
+// }
+
+// @media screen and (max-width: 767px) {
+//     .commentform {
+//         margin-left: 0;
+//     }
+//     #blog_post_info_block #blog_post_info #div_digg {
+//         margin-top: 1rem;
+//     }
+// }

@@ -27,7 +27,7 @@ pnpm install
 pnpm dev
 ```
 
-This starts the Vite dev server at `http://localhost:8081`
+This starts the Vite dev server.
 
 ### Build
 

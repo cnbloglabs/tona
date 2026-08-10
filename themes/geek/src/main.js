@@ -3,6 +3,10 @@ import {
   background,
   catalog,
   clickEffects,
+  codeCopy,
+  codeHighlight,
+  codeLang,
+  codeLinenumbers,
   colorMode,
   commentsAvatars,
   darkMode,
@@ -19,14 +23,18 @@ import {
 } from 'tona-plugins'
 import './style/index.scss'
 
-Object.values(import.meta.glob('./modules/**/*.js', { eager: true })).forEach(
-  (i) => {
+Object.values(import.meta.glob('./modules/**/*.js', { eager: true }))
+  .filter((m) => typeof m.install === 'function')
+  .forEach((i) => {
     i.install()
-  },
-)
+  })
 
 createTheme()
   .use(clickEffects, { enable: false })
+  .use(codeCopy, { enable: true })
+  .use(codeHighlight, { enable: true })
+  .use(codeLang, { enable: true })
+  .use(codeLinenumbers, { enable: true })
   .use(commentsAvatars, { enable: true })
   .use(colorMode, { enable: true, color: '#2F63FF' })
   .use(emoji, { enable: true })

@@ -4,6 +4,9 @@ import {
   catalog,
   charts,
   clickEffects,
+  codeCopy,
+  codeHighlight,
+  codeLinenumbers,
   colorMode,
   commentsAvatars,
   darkMode,
@@ -24,6 +27,13 @@ import {
   webTag,
 } from 'tona-plugins'
 import './style/index.scss'
+import './style/response.scss'
+
+Object.values(import.meta.glob('./modules/**/*.js', { eager: true }))
+  .filter((m) => typeof m.install === 'function')
+  .forEach((i) => {
+    i.install()
+  })
 
 createTheme()
   .use(colorMode, {
@@ -43,6 +53,15 @@ createTheme()
     enable: true,
   })
   .use(clickEffects, {
+    enable: true,
+  })
+  .use(codeCopy, {
+    enable: true,
+  })
+  .use(codeHighlight, {
+    enable: true,
+  })
+  .use(codeLinenumbers, {
     enable: true,
   })
   .use(webTag, {

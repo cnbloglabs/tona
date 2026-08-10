@@ -1,4 +1,4 @@
-import { getLinksOptions } from 'tona-options'
+import { getGithubOptions, getLinksOptions } from 'tona-options'
 import {
   admin,
   cnblogHome,
@@ -8,7 +8,8 @@ import {
   rss,
   send,
 } from '../../constants/links'
-import { isOwner } from '../../utils/cnblog'
+import { avatar } from '../../constants/cnblog'
+import { getBlogName, isOwner } from '../../utils/cnblog'
 import './index.scss'
 
 function buildLeftSidebarContainer() {
@@ -21,42 +22,11 @@ function buildLogo() {
   $('#left-side').append(el)
 }
 
-/**
- * 兼容旧的配置 Array<Link>
- * 当前推荐的配置类型为
- *    {
- *      enable: boolean;
- *      value: Array<Link>;
- *    }
- */
-function isOldConfig(userConfig) {
-  for (const [key] of Object.entries(userConfig)) {
-    if (!Number.isNaN(Number.parseInt(key, 10))) {
-      return true
-    }
-  }
-  return false
-}
-
-function resolveCustomLinks() {
-  const userConfig = getLinksOptions()
-  if (isOldConfig(userConfig)) {
-    const links = []
-    for (const [key, value] of Object.entries(userConfig)) {
-      if (!Number.isNaN(Number.parseInt(key, 10))) {
-        links.push(value)
-      }
-    }
-    return { enabled: true, links }
-  }
-  const { enable, value } = userConfig
-  return { enabled: !!enable, links: value || [] }
-}
-
-function buildCustomLinks({ enabled, links }) {
-  if (!enabled) {
+function buildCustomLinks(links) {
+  if (!links.length) {
     return
   }
+
   const el = $('<div class="links left-side-wrapper"><ul></ul></div>')
   for (const { name, link } of links) {
     el.find('ul').append(
@@ -175,7 +145,7 @@ function appendCollapsedCustomLinksNav(links) {
   bindCustomLinksPopover($entry)
 }
 
-function removeHeaderToLeftSidebar(resolvedLinks) {
+function removeHeaderToLeftSidebar(links) {
   const navList = [
     {
       icon: 'fa-blog',
@@ -193,13 +163,13 @@ function removeHeaderToLeftSidebar(resolvedLinks) {
       icon: 'fa-pen-square',
       title: '新随笔',
       url: newPost,
-      allowVisit: true,
+      allowVisit: false,
     },
     {
       icon: 'fa-paper-plane',
       title: '草稿箱',
       url: draftBox,
-      allowVisit: true,
+      allowVisit: false,
     },
     {
       icon: 'fa-envelope',
@@ -248,15 +218,38 @@ function removeHeaderToLeftSidebar(resolvedLinks) {
 
   $('#left-side .logo').after(el)
 
-  if (resolvedLinks.enabled) {
-    appendCollapsedCustomLinksNav(resolvedLinks.links)
+  if (links.length) {
+    appendCollapsedCustomLinksNav(links)
   }
+}
+
+function buildLeftsideBottomBtns() {
+  const { enable, url } = getGithubOptions()
+  if (!enable) {
+    return
+  }
+  const userName = getBlogName()
+  const el = `
+    <div class="leftside-bottom">
+      <a href="${url}" class="follow-me" target="_blank">
+        <span class="follow-text"><i class="fas fa-github"></i><span>Fork me on GitHub</span></span>
+        <span class="developer">
+          <img src="${avatar}">
+          <span>${userName}</span>
+        </span>
+      </a>
+    </div>`
+  $('#left-side').append(el)
 }
 
 export function install() {
   buildLeftSidebarContainer()
   buildLogo()
-  const resolvedLinks = resolveCustomLinks()
-  buildCustomLinks(resolvedLinks)
-  removeHeaderToLeftSidebar(resolvedLinks)
+
+  const { enable, value } = getLinksOptions()
+  const links = enable ? value : []
+
+  buildCustomLinks(links)
+  removeHeaderToLeftSidebar(links)
+  buildLeftsideBottomBtns()
 }

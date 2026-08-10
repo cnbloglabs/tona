@@ -1,0 +1,73 @@
+#blog-news {
+  display: grid;
+  grid-column-gap: 8px;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'avatar info'
+    'follow follow';
+}
+
+.custom-avatar {
+  grid-area: avatar;
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+}
+
+.custom-info {
+  grid-area: info;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  .custom-name {
+    display: inline-block;
+    white-space: nowrap;
+    &:hover {
+      animation: move 1.5s infinite alternate linear;
+    }
+  }
+}
+
+#profile_block {
+  grid-area: follow;
+  margin-top: 10px;
+  font-size: 0;
+  & > a {
+    display: none;
+  }
+}
+
+#p_b_follow {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  background: none;
+  border: 2px solid;
+  line-height: 1;
+  padding: 0.6em 2em;
+  color: var(--themeColor);
+  transition: 0.25s;
+  border-radius: 2px;
+  &:hover {
+    animation: pulse 1s 1;
+    box-shadow: 0 0 0 2em rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(calc(-100% + 150px), 0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--themeColor);
+  }
+}

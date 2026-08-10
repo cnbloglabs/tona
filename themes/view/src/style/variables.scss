@@ -1,0 +1,35 @@
+// default-variables
+:root {
+    --color-basic-50: #ffffff;
+    --color-basic-75: #fafafa;
+    --color-basic-100: #f8f8f8;
+    --color-basic-200: #eaeaea;
+    --color-basic-300: #e1e1e1;
+    --color-basic-400: #cacaca;
+    --color-basic-500: #b3b3b3;
+    --color-basic-600: #8e8e8e;
+    --color-basic-700: #6e6e6e;
+    --color-basic-800: #4b4b4b;
+    --color-basic-900: #2c2c2c;
+
+    --main-bg: #d1dee8;
+    --emoji-bg: var(--color-basic-50);
+}
+
+// variables in dark mode
+:root[theme='dark'] {
+    --color-basic-50: #252525;
+    --color-basic-75: #2f2f2f;
+    --color-basic-100: #323232;
+    --color-basic-200: #3e3e3e;
+    --color-basic-300: #4a4a4a;
+    --color-basic-400: #5a5a5a;
+    --color-basic-500: #6e6e6e;
+    --color-basic-600: #909090;
+    --color-basic-700: #b9b9b9;
+    --color-basic-800: #bdbdbd;
+    --color-basic-900: #c2c2c2;
+
+    --main-bg: var(--color-basic-300);
+    --emoji-bg: var(--color-basic-200);
+}

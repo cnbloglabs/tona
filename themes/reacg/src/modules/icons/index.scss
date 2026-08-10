@@ -1,0 +1,128 @@
+.icon {
+  width: 54px;
+  height: 54px;
+  vertical-align: -8.1px;
+  fill: currentColor;
+  overflow: hidden;
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#navList {
+  li .icon {
+    margin-right: 5px;
+    width: 27px;
+  }
+}
+
+.c_b_p_desc_readmore {
+  .icon {
+    width: 1em;
+    height: 1.2em;
+    vertical-align: middle;
+  }
+  &:hover .icon {
+    transform: translateX(2.7px);
+    transition: all 0.2s;
+  }
+}
+
+.postTitle,
+.entrylistPosttitle,
+.PostListTitle {
+  .icon {
+    width: 1.6em;
+    height: 1.6em;
+  }
+}
+
+.post {
+  .postTitle {
+    .icon {
+      width: 1em;
+      height: 1.2em;
+      color: #10ac84;
+    }
+  }
+}
+
+#cnblogs_post_body {
+  h1 .icon,
+  h2 .icon {
+    margin-right: 5.4px;
+    width: 1.2em;
+    height: 1.2em;
+  }
+}
+
+#sideBar {
+  h3 {
+    display: flex;
+    align-items: center;
+    .icon {
+      margin-right: 5.4px;
+      width: 1.1em;
+      height: 1.1em;
+    }
+  }
+}
+
+.sidebar-block,
+#sidebar_search_box,
+#sidebar_shortcut ul li a,
+#sidebar_recentposts ul li a,
+.icon #sidebar_scorerank ul li a,
+#sidebar_toptags ul li a,
+#sidebar_postcategory ul li a,
+#sidebar_imagecategory ul li a,
+#sidebar_postarchive ul li a,
+#sidebar_recentcomments .RecentCommentBlock,
+#TopViewPostsBlock,
+#TopFeedbackPostsBlock,
+#TopDiggPostsBlock {
+  .icon {
+    width: 1.2em;
+    height: 1.8em;
+    margin-right: 2px;
+  }
+}
+
+.custom-gitee {
+  span {
+    color: var(--color-basic-900);
+  }
+}
+
+#navList {
+  .custom-github .icon {
+    width: 54px;
+  }
+}
+
+.mode-change .icon {
+  width: 40px;
+  cursor: pointer;
+}
+
+.mode-change .icon {
+  animation: changeModeRotate 20s linear infinite;
+}
+
+.mode-change.dark {
+  .icon {
+    animation: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mode-change {
+    margin-left: auto !important;
+  }
+}
+
+@keyframes changeModeRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

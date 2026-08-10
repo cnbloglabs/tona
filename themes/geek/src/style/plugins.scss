@@ -1,4 +1,8 @@
 @use '/node_modules/tona-plugins/src/plugins/codeTrafficLight/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeHighlight/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeLinenumbers/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeCopy/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeLang/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/postMessage/index.scss' as * with (
   $postMessage: (
     categoriesBackground: #f13a3a,
@@ -19,7 +23,7 @@
   $emoji: (
     textEmojiColor: var(--geek-color-6),
     bg: var(--geek-color-1),
-    borderColor: var(--geek-color-2),
+    borderColor: var(--geek-color-3),
     hoverBg: var(--geek-color-3),
     hoverBorderColor: var(--color-primary),
   )

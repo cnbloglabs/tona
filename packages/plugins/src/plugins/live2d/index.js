@@ -7,6 +7,27 @@ const live2dBase = 'https://cdn.jsdelivr.net/gh/guangzan/awesCnb-live2dModels'
 const live2djs =
   'https://files.cnblogs.com/files/guangzan/live2d.min.js?t=1688786567&download=true'
 
+let audioPlayPatched = false
+
+/**
+ * 静音模型声音：包装 HTMLAudioElement.prototype.play，
+ * 仅拦截 src 属于 live2d 模型库的 audio，不影响页面其他音频（如音乐播放器）
+ */
+function muteLive2dAudio() {
+  if (audioPlayPatched) {
+    return
+  }
+  audioPlayPatched = true
+
+  const play = HTMLAudioElement.prototype.play
+  HTMLAudioElement.prototype.play = function () {
+    if (this.src.includes(live2dBase)) {
+      return Promise.resolve()
+    }
+    return play.apply(this, arguments)
+  }
+}
+
 /**
  * 构建模型容器
  * @param {string} position
@@ -48,7 +69,7 @@ function loadModel(model) {
 }
 
 export function live2d(_, devOptions) {
-  const { enable, page, agent, model, position, gap, width, height } =
+  const { enable, page, agent, model, position, gap, width, height, mute } =
     getLive2dOptions(devOptions)
 
   if (!enable) {
@@ -59,6 +80,10 @@ export function live2d(_, devOptions) {
   }
   if (agent !== userAgent() && agent !== 'all') {
     return
+  }
+
+  if (mute) {
+    muteLive2dAudio()
   }
 
   buildContainer(position, width, height)

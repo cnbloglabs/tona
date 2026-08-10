@@ -5,6 +5,9 @@
   )
 );
 @use '/node_modules/tona-plugins/src/plugins/clickEffects/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeCopy/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeHighlight/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/codeLinenumbers/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/codeTrafficLight/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/colorMode/index.scss' as *;
 @use '/node_modules/tona-plugins/src/plugins/commentsAvatars/index.scss' as *;
@@ -70,6 +73,7 @@
   )
 );
 @use '/node_modules/tona-plugins/src/plugins/webTag/index.scss' as *;
+@use '/node_modules/tona-plugins/src/plugins/footer/index.scss' as *;
 
 #sidebar_news .custom-signature {
   padding-top: 0;
@@ -96,10 +100,11 @@
     padding: 10.098px 14.418px;
     background-color: var(--color-basic-50);
     border-bottom: 1px solid hsla(0, 0%, 59.2%, 0.1);
+    font-weight: normal;
 
     .icon {
-      width: 1.5em;
-      height: 1.5em;
+      width: 1.1em;
+      height: 1.1em;
       margin-right: 5px;
     }
   }

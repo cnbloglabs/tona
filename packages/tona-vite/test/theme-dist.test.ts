@@ -54,35 +54,51 @@ describe('Theme Dist', () => {
     fs.rmSync(tempDir, { recursive: true, force: true })
   })
 
-  it('inlineCss produces Inline CSS Dist: single hashed JS, no theme CSS', async () => {
+  // A JS filename carrying a content hash — excludes the stable `{themeName}.min.js`
+  const hashedJs = new RegExp(`^${THEME}\\.(?!min\\.)[A-Za-z0-9_-]+\\.js$`)
+
+  it('inlineCss produces Inline CSS Dist: single {themeName}.min.js with inline CSS, no theme CSS', async () => {
     await buildTheme(tempDir, { inlineCss: true })
 
     const files = distFiles(tempDir)
     expect(files).toHaveLength(1)
-    expect(files[0]).toMatch(new RegExp(`^${THEME}\\.[A-Za-z0-9_-]+\\.js$`))
+    expect(files[0]).toBe(`${THEME}.min.js`)
     expect(files.some((f) => f.endsWith('.css'))).toBe(false)
 
     const js = fs.readFileSync(path.join(tempDir, 'dist', files[0]!), 'utf8')
     expect(js).toMatch(/createElement\([`'"]style[`'"]\)/)
   })
 
-  it('default Theme Dist is hashed JS plus independent .min.css', async () => {
+  it('default Theme Dist is stable {themeName}.min.js plus independent .min.css', async () => {
     await buildTheme(tempDir)
 
     const files = distFiles(tempDir)
-    expect(files.some((f) => new RegExp(`^${THEME}\\.[A-Za-z0-9_-]+\\.js$`).test(f))).toBe(
-      true,
-    )
+    expect(files).toContain(`${THEME}.min.js`)
+    expect(files).toContain(`${THEME}.min.css`)
+    expect(files.some((f) => hashedJs.test(f))).toBe(false)
+    expect(files.some((f) => f.endsWith('.map'))).toBe(false)
+  })
+
+  it('hash:true emits hashed {themeName}.[hash].js plus independent .min.css', async () => {
+    await buildTheme(tempDir, { hash: true })
+
+    const files = distFiles(tempDir)
+    expect(files.some((f) => hashedJs.test(f))).toBe(true)
     expect(files).toContain(`${THEME}.min.css`)
   })
 
-  it('hash:false emits stable {themeName}.js filename', async () => {
+  it('hash:false emits stable {themeName}.min.js filename', async () => {
     await buildTheme(tempDir, { hash: false })
 
     const files = distFiles(tempDir)
-    expect(files).toContain(`${THEME}.js`)
-    expect(files.some((f) => new RegExp(`^${THEME}\\.[A-Za-z0-9_-]+\\.js$`).test(f))).toBe(
-      false,
-    )
+    expect(files).toContain(`${THEME}.min.js`)
+    expect(files.some((f) => hashedJs.test(f))).toBe(false)
+  })
+
+  it('sourcemap:true emits a {themeName}.min.js.map file', async () => {
+    await buildTheme(tempDir, { sourcemap: true })
+
+    const files = distFiles(tempDir)
+    expect(files.some((f) => f.endsWith('.map'))).toBe(true)
   })
 })
