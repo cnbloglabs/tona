@@ -23,6 +23,7 @@ let tooltips = DEFAULT_TOOLTIPS
 let iconType = 'className'
 let systemMediaQuery = null
 let systemChangeHandler = null
+let modeButtonObserver = null
 
 /**
  * 切换代码块深色、浅色主题
@@ -97,6 +98,8 @@ function listenSystemMode() {
 function updateModeButton() {
   const $item = $('.mode-change')
   if (!$item.length) {
+    // tools 插件可能晚于本插件渲染按钮，监听按钮出现后再同步
+    watchModeButton()
     return
   }
 
@@ -112,6 +115,52 @@ function updateModeButton() {
   const $tip = $item.find('.tooltip')
   if ($tip.length) {
     $tip.text(tooltips[currentMode])
+  }
+}
+
+/**
+ * 监听 .mode-change 按钮出现，出现后同步图标与 tooltip
+ */
+function watchModeButton() {
+  if (modeButtonObserver || $('.mode-change').length) {
+    return
+  }
+
+  const MutationObserverImpl =
+    window.MutationObserver || globalThis.MutationObserver
+  if (!MutationObserverImpl) {
+    // 不支持 MutationObserver 时退化为轮询
+    setTimeout(watchModeButton, 200)
+    return
+  }
+
+  modeButtonObserver = new MutationObserverImpl(() => {
+    if ($('.mode-change').length) {
+      stopWatchModeButton()
+      updateModeButton()
+    }
+  })
+  modeButtonObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  })
+
+  // 兜底：即使未捕获到变更也定期检查一次
+  setTimeout(() => {
+    if ($('.mode-change').length) {
+      stopWatchModeButton()
+      updateModeButton()
+    }
+  }, 500)
+}
+
+/**
+ * 停止监听按钮出现
+ */
+function stopWatchModeButton() {
+  if (modeButtonObserver) {
+    modeButtonObserver.disconnect()
+    modeButtonObserver = null
   }
 }
 
@@ -183,7 +232,5 @@ export function darkMode(_, devOptions) {
 
   init(darkDefault, followSystem)
   listenToggleButtonClick()
-
-  // tools 插件可能晚于本插件渲染按钮，DOM ready 后再同步一次图标
-  $(updateModeButton)
+  updateModeButton()
 }
