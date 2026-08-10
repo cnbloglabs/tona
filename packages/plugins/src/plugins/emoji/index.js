@@ -1,7 +1,7 @@
 // 评论输入表情
 import { getEmojiOptions } from 'tona-options'
 import { isPostDetailsPage } from '../../utils/cnblog'
-import { isUrl } from '../../utils/helpers'
+import { isUrl, poll } from '../../utils/helpers'
 
 const defaultEmojiList = [
   {
@@ -162,4 +162,7 @@ export function emoji(_theme, devOptions) {
 
   builder()
   window.buildEmojis = builder
+
+  // 评论编辑框可能异步渲染（如登录后/懒加载），等待其出现后再挂载按钮
+  poll(() => $('.commentbox_title_right').length, builder)
 }
