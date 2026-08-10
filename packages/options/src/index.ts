@@ -178,9 +178,7 @@ export const getDarkModeOptions: GetDarkModeOptions = defineOptions(
   {
     enable: false,
     darkDefault: false,
-    autoDark: false,
-    autoLight: false,
-    autoMode: false,
+    followSystem: false,
   },
 )
 export const getMusicPlayerOptions: GetMusicPlayerOptions = defineOptions(

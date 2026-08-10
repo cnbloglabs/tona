@@ -551,9 +551,7 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: false,
         darkDefault: false,
-        autoDark: false,
-        autoLight: false,
-        autoMode: false,
+        followSystem: false,
       })
     })
 
@@ -570,9 +568,7 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: true,
         darkDefault: true,
-        autoDark: false,
-        autoLight: false,
-        autoMode: false,
+        followSystem: false,
       })
     })
 
@@ -580,7 +576,7 @@ describe('Options 配置测试', () => {
       window.opts = {
         mode: {
           enable: true,
-          autoMode: true,
+          followSystem: true,
         },
       }
 
@@ -589,9 +585,7 @@ describe('Options 配置测试', () => {
       expect(options).toEqual({
         enable: true,
         darkDefault: false,
-        autoDark: false,
-        autoLight: false,
-        autoMode: true,
+        followSystem: true,
       })
     })
   })
