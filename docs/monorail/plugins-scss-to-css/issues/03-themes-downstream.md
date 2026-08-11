@@ -1,7 +1,20 @@
 # 03 — 主题下游迁移（geek/reacg/simple/view）
 
-Status: open
+Status: done
 Blocked by: 01, 02
+
+## Comments
+
+Build 2026-08-12: start — 84a4eb2a
+Build 2026-08-12: done — 4 主题 plugins.scss→plugins.css + index.scss 引用同步 + themes/test/plugins-css.test.ts；4 主题 `vp build` 全绿，geek JS 与 /tmp/geek.min.js.before 逐字节一致，CSS 规则级 spot-check 通过；`pnpm test` 293 passed（唯一失败为 packages/options 网络相关既有失败，干净树同样失败）；`pnpm typecheck` 因环境缺 vue-tsc 无法运行（与本次改动无关）。
+
+实现注记：
+- **geek/reacg 的 index.scss 引用**：issue 原文「`@use './plugins.scss' as *` → `@import './plugins.css'`」字面替换无法编译——sass 要求所有 `@use` 先于其他语句，中段 `@import` 会报错。实际落地为 `@use './plugins.css' as *;`（仅改扩展名，@use 一个 css 模块等价于原位引入，sass 保留其内部 `@import` 供 postcss-import 内联），层叠顺序与迁移前完全一致。simple/view 按原文仅改扩展名为 `@import './plugins.css';`。
+- **view 遗留 sass 变量**（`$player/$postMeaage/$signature`，注释自证死代码）：按确认删除，未迁移（编译产物本无输出）。
+- **reacg `overflow-y: scroll；;`**（全角分号，原声明无效被忽略）：按确认修为 `overflow-y: scroll;`。
+- **主题自定义样式**：以 sass CLI 编译迁移前 plugins.scss（git be935e14 + 旧插件 scss）的产物为权威参照展开为扁平 CSS，diff 仅注释/引号/颜色函数写法等语义等价差异。
+- **tona-vite dist 过期**：`packages/tona-vite/dist`（gitignored）早于 issue 02 的 alias 注入，主题构建曾拿不到 `@tona-plugins` alias；本地 `pnpm -F tona-vite build` 重建后 4 主题构建通过。源文件无改动，发布/CI 重建 dist 即含 alias。
+- **全量产物回归**见 issue 04（verify-regression）。
 
 ## What to build
 
