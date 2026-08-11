@@ -59,3 +59,7 @@ Vite 依赖扫描器在 dev 启动时爬取依赖图的入口文件。`computeEn
 ## Toolbar Button
 
 tools 浮动工具栏内一个可插拔、可独立定义的按钮单元（即原 toolbar item 的规范称谓）：自包含 `{ enable, page, icon, iconType, tooltip, className, callback, setup? }`。按钮由工厂函数（如 `createBackTopButton`）创建，主题以 `toolbarItems` 声明式列表选择；未引入的按钮代码不进入主题产物（tree-shaking）。对应 effort 见 `docs/monorail/tools-buttons/`。
+
+## Plugin CSS Variables
+
+plugins 包内插件样式的可配置 CSS 变量，命名 `--<插件slug>-<kebab-case-key>`（如 `--post-message-categories-background`）。默认值在插件 css 文件顶部 `:root` 声明块集中定义，规则体以 `var(--xxx)` 引用；主题通过覆盖同名变量定制插件样式，替代原 sass `@use ... with()` 配置机制。对应 ADR-003 与 effort `docs/monorail/plugins-scss-to-css/`。
