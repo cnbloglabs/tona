@@ -1,0 +1,60 @@
+:root {
+  --player-body-background: #fff;
+}
+
+#player.aplayer {
+  background: none;
+}
+
+#player.aplayer .aplayer-list ol li {
+  background: var(--player-body-background);
+}
+
+#player:hover .aplayer-list {
+  transform: scaleX(1);
+  left: 0;
+}
+
+#player:hover .aplayer-body {
+  left: 0;
+}
+
+#player .aplayer-list {
+  position: relative;
+  transform: scaleX(0.838);
+  left: -34px;
+}
+
+#player .aplayer-body {
+  left: -66px;
+  background-color: var(--player-body-background);
+}
+
+#player .aplayer-body .aplayer-info {
+  border-top: none;
+}
+
+#player .aplayer-body .aplayer-miniswitcher {
+  background-color: var(--player-body-background);
+  border-left: 1px solid #999;
+}
+
+#player .aplayer-lrc {
+  display: none;
+}
+
+#player .aplayer-lrc .aplayer-lrc-contents {
+  color: inherit;
+}
+
+#player .aplayer-lrc .aplayer-lrc-contents p {
+  color: inherit;
+  font-size: 14px;
+  text-shadow: none;
+}
+
+@media screen and (max-width: 767px) {
+  #player {
+    display: none;
+  }
+}

@@ -15,7 +15,7 @@ import {
   license,
   tools,
 } from '../src/index'
-import './index.scss'
+import './index.css'
 
 const theme = createTheme()
 

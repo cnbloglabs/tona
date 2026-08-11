@@ -1,18 +1,10 @@
-@use 'sass:map';
-
-$postBottomimage: () !default;
-$postBottomimage: map.merge(
-  (
-    imageHeight: 200px,
-  ),
-  $postBottomimage
-);
-
-$bottomImageHeight: map.get($postBottomimage, imageHeight);
+:root {
+  --post-bottomimage-image-height: 200px;
+}
 
 #custom-post-bottomimage {
   width: 100%;
-  height: $bottomImageHeight;
+  height: var(--post-bottomimage-image-height);
   background-size: cover;
   background-repeat: no-repeat;
   margin-bottom: 10px;

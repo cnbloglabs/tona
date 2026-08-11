@@ -1,11 +1,11 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css);
-@import '../src/plugins/codeTrafficLight/index.scss';
-@import '../src/plugins/codeHighlight/index.scss';
-@import '../src/plugins/codeLinenumbers/index.scss';
-@import '../src/plugins/tools/index.scss';
-@import '../src/plugins/darkMode/index.scss';
-@import '../src/plugins/license/index.scss';
-@import '../src/plugins/emoji/index.scss';
+@import '../src/plugins/codeTrafficLight/index.css';
+@import '../src/plugins/codeHighlight/index.css';
+@import '../src/plugins/codeLinenumbers/index.css';
+@import '../src/plugins/tools/index.css';
+@import '../src/plugins/darkMode/index.css';
+@import '../src/plugins/license/index.css';
+@import '../src/plugins/emoji/index.css';
 
 .copy-btns::before,
 .custom-comment-avatar::after,

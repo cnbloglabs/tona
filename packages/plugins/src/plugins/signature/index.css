@@ -1,0 +1,10 @@
+:root {
+  --signature-padding: 1rem 14px;
+  --signature-font-size: 1em;
+}
+
+.custom-signature {
+  padding: var(--signature-padding);
+  font-size: var(--signature-font-size);
+  line-height: 1.5em;
+}

@@ -1,0 +1,94 @@
+:root {
+  --post-message-categories-background: #ff6b6b;
+  --post-message-tags-background-1: #22a6b3;
+  --post-message-tags-background-2: #0097e6;
+  --post-message-tags-background-3: #fbc531;
+  --post-message-tags-background-4: #10ac84;
+  --post-message-tags-background-5: #22a6b3;
+  --post-message-tags-background-6: #0097e6;
+  --post-message-color-categories: #fff;
+  --post-message-color-tags: #333;
+  --post-message-color-message: #999;
+}
+
+.post-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.message-top {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.message-top .message-categories,
+.message-top .message-tags {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.message-top .message-categories a,
+.message-top .message-tags a {
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: 14px;
+  border-radius: 4px;
+  margin: 0 0 0 8px;
+}
+
+.message-top .message-categories {
+  margin: 0 16px 0 0;
+}
+
+.message-top .message-categories a {
+  color: var(--post-message-color-categories);
+  background-color: var(--post-message-categories-background);
+  border: 1px solid var(--post-message-categories-background);
+}
+
+.message-top .message-tags a {
+  border: 1px solid;
+  color: var(--post-message-color-tags);
+}
+
+.message-tags a:nth-child(1) {
+  border-color: var(--post-message-tags-background-1);
+}
+
+.message-tags a:nth-child(2) {
+  border-color: var(--post-message-tags-background-2);
+}
+
+.message-tags a:nth-child(3) {
+  border-color: var(--post-message-tags-background-3);
+}
+
+.message-tags a:nth-child(4) {
+  border-color: var(--post-message-tags-background-4);
+}
+
+.message-tags a:nth-child(5) {
+  border-color: var(--post-message-tags-background-5);
+}
+
+.message-tags a:nth-child(6) {
+  border-color: var(--post-message-tags-background-6);
+}
+
+.message-bottom {
+  display: flex;
+  gap: 8px;
+  color: var(--post-message-color-message);
+  white-space: nowrap;
+  overflow: auto;
+  font-size: 13px;
+}
+
+#EntryTag,
+#BlogPostCategory {
+  display: none;
+}

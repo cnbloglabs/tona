@@ -1,0 +1,43 @@
+:root {
+  --post-signature-primary: #fa745e;
+  --post-signature-background: #f6f8fa;
+  --post-signature-border-radius: 2px;
+}
+
+#mainContent #post-signature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 25px 0;
+  padding: 10px 24px 10px 15px;
+  background: var(--post-signature-background);
+  border-left: 5px solid var(--post-signature-primary);
+  border-radius: var(--post-signature-border-radius);
+}
+
+#mainContent #post-signature p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6em;
+}
+
+#mainContent #post-signature a {
+  color: inherit;
+  border-bottom: none;
+}
+
+#mainContent #post-signature::before {
+  content: '!';
+  background: var(--post-signature-primary);
+  position: absolute;
+  top: 16px;
+  left: -12px;
+  color: #fff;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 18px;
+  font-weight: 800;
+  font-size: 12px;
+}

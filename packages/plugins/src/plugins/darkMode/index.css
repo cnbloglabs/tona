@@ -1,16 +1,7 @@
-@use 'sass:map';
-
-$mode: () !default;
-$mode: map.merge(
-  (
-    bg-light: #fff,
-    bg-dark: #252528,
-  ),
-  $mode
-);
-
-$bg-light: map.get($mode, bg-light);
-$bg-dark: map.get($mode, bg-dark);
+:root {
+  --mode-bg-light: #fff;
+  --mode-bg-dark: #252528;
+}
 
 .dark-to-light:after {
   content: '';
@@ -21,7 +12,7 @@ $bg-dark: map.get($mode, bg-dark);
   left: 0;
   top: 0;
   margin-left: 0;
-  background-color: $bg-dark;
+  background-color: var(--mode-bg-dark);
   opacity: 0.7;
   animation: toLight 0.6s linear 0s forwards;
   pointer-events: none;
@@ -36,7 +27,7 @@ $bg-dark: map.get($mode, bg-dark);
   left: 0;
   top: 0;
   margin-left: 0;
-  background-color: $bg-light;
+  background-color: var(--mode-bg-light);
   opacity: 0.7;
   animation: toDark 0.6s linear 0s forwards;
   pointer-events: none;
@@ -44,24 +35,24 @@ $bg-dark: map.get($mode, bg-dark);
 
 @keyframes toLight {
   0% {
-    background-color: $bg-dark;
+    background-color: var(--mode-bg-dark);
     opacity: 0.7;
   }
 
   100% {
-    background-color: $bg-light;
+    background-color: var(--mode-bg-light);
     opacity: 0;
   }
 }
 
 @keyframes toDark {
   0% {
-    background-color: $bg-light;
+    background-color: var(--mode-bg-light);
     opacity: 0.7;
   }
 
   100% {
-    background-color: $bg-dark;
+    background-color: var(--mode-bg-dark);
     opacity: 0;
   }
 }

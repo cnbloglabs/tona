@@ -1,0 +1,53 @@
+:root {
+  --line-numbers-color: #999999;
+}
+
+/* 覆盖博客园bundle css*/
+@media screen and (max-width: 767px) {
+  #cnblogs_post_body td {
+    white-space: pre;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .awes-linenumber {
+    display: none;
+  }
+}
+
+/* Markdown */
+#cnblogs_post_body pre {
+  display: flex;
+}
+
+#cnblogs_post_body pre ul.awes-linenumber {
+  margin-top: 0;
+}
+
+#cnblogs_post_body pre .awes-linenumber {
+  margin: 0;
+  padding: 16px 16px 8px 16px;
+}
+
+#cnblogs_post_body pre .awes-linenumber li {
+  font-weight: normal;
+  color: var(--line-numbers-color);
+  list-style: none;
+  text-align: right;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+/* 富文本 */
+#cnblogs_post_body .cnblogs_code pre {
+  display: block;
+}
+
+#cnblogs_post_body .cnblogs_code pre span[style='color: #008080;'] {
+  padding: 2px 0;
+  border: none;
+  text-align: center;
+  color: var(--line-numbers-color) !important;
+  word-break: normal;
+  white-space: pre;
+}

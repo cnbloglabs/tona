@@ -1,0 +1,55 @@
+:root {
+  --copy-bg: rgba(0, 0, 0, 0.6);
+  --copy-color: rgb(241, 239, 239);
+  --copy-hover-bg: rgba(0, 0, 0, 0.2);
+  --copy-hover-color: #eee;
+}
+
+#cnblogs_post_body pre {
+  position: relative;
+}
+
+.cnblogs_code,
+.cnblogs_Highlighter {
+  position: relative;
+}
+
+.cnblogs_code .copy-btns,
+.cnblogs_Highlighter .copy-btns {
+  z-index: 1;
+}
+
+pre:hover .copy-btns,
+.cnblogs_code:hover .copy-btns,
+.cnblogs_Highlighter:hover .copy-btns {
+  visibility: visible;
+}
+
+.copy-btns {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 2px 8px;
+  visibility: hidden;
+  color: var(--copy-color) !important;
+  font-size: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.copy-btns {
+  background-color: var(--copy-bg) !important;
+}
+
+.copy-btns:active {
+  background: var(--copy-hover-bg);
+  color: var(--copy-hover-color);
+}
+
+@media screen and (max-width: 768px) {
+  .copy-btns {
+    display: none;
+  }
+}

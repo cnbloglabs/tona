@@ -1,23 +1,16 @@
-@use 'sass:map';
-
-$postTopimage: () !default;
-$postTopimage: map.merge(
-  (
-    height: 400px,
-  ),
-  $postTopimage
-);
-
-$height: map.get($postTopimage, height);
+:root {
+  --post-topimage-height: 400px;
+}
 
 #custom-post-topimage {
   width: 100%;
-  height: $height;
+  height: var(--post-topimage-height);
   background-size: cover;
   background-repeat: no-repeat;
   margin-bottom: 10px;
   border-radius: 2px;
 }
+
 #custom-post-topimage:hover {
   cursor: zoom-in;
 }

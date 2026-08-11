@@ -1,0 +1,19 @@
+:root {
+  --code-language-color: #999999;
+  --code-language-background-color: var(--hl-base);
+}
+
+#cnblogs_post_body pre {
+  margin: 24px 0;
+}
+
+.awes-lang {
+  position: absolute;
+  top: -19px;
+  right: 32px;
+  padding: 0 16px;
+  font-size: 12px;
+  color: var(--code-language-color);
+  background: var(--code-language-background-color);
+  border-radius: 4px 4px 0 0;
+}

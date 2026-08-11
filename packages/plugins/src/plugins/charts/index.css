@@ -1,0 +1,7 @@
+:root {
+  --chart-padding: 8px;
+}
+
+#chart {
+  padding: var(--chart-padding);
+}

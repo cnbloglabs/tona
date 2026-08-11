@@ -1,0 +1,271 @@
+/* https://highlightjs.readthedocs.io/en/latest/theme-guide.html */
+
+/* tinymce5 */
+/* Markdown */
+#cnblogs_post_body.blogpost-body-html pre,
+#mainContent .cnblogs-markdown pre {
+  margin-top: 8px;
+  padding: 24px 0 10px;
+  border-radius: 4px;
+  background: var(--hl-base);
+  font-family: Consolas, Lucida Console, Monaco, Andale Mono, Ubuntu Mono,
+    monospace !important;
+}
+
+/* 单行代码及代码块 */
+#cnblogs_post_body.blogpost-body-html code,
+#mainContent .cnblogs-markdown code {
+  font-family: Consolas, Lucida Console, Monaco, Andale Mono, Ubuntu Mono,
+    monospace !important;
+  font-size: 15px !important;
+  margin: 0;
+  word-break: break-word !important;
+  border: none !important;
+}
+
+/* 代码块 */
+#cnblogs_post_body.blogpost-body-html li code,
+#mainContent .cnblogs-markdown li code {
+  font-weight: 700;
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs,
+#mainContent .cnblogs-markdown .hljs {
+  display: block !important;
+  color: var(--hl-mono-1) !important;
+  background: var(--hl-base) !important;
+  border: none !important;
+  padding: 16px 10px 8px 13px !important;
+  font-weight: normal;
+  white-space: inherit;
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-punctuation,
+#mainContent .cnblogs-markdown .hljs-punctuation,
+#cnblogs_post_body.blogpost-body-html .hljs-tag,
+#mainContent .cnblogs-markdown .hljs-tag {
+  color: var(--hl-mono-1);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-comment,
+#mainContent .cnblogs-markdown .hljs-comment,
+#cnblogs_post_body.blogpost-body-html .hljs-quote,
+#mainContent .cnblogs-markdown .hljs-quote {
+  color: var(--hl-mono-3);
+  font-style: italic;
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-tag,
+#mainContent .cnblogs-markdown .hljs-tag {
+  color: var(--hl-tag);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-doctag,
+#mainContent .cnblogs-markdown .hljs-doctag,
+#cnblogs_post_body.blogpost-body-html .hljs-formula,
+#mainContent .cnblogs-markdown .hljs-formula,
+#cnblogs_post_body.blogpost-body-html .hljs-keyword,
+#mainContent .cnblogs-markdown .hljs-keyword {
+  color: var(--hl-hue-3);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-deletion,
+#mainContent .cnblogs-markdown .hljs-deletion,
+#cnblogs_post_body.blogpost-body-html .hljs-name,
+#mainContent .cnblogs-markdown .hljs-name,
+#cnblogs_post_body.blogpost-body-html .hljs-section,
+#mainContent .cnblogs-markdown .hljs-section,
+#cnblogs_post_body.blogpost-body-html .hljs-selector-tag,
+#mainContent .cnblogs-markdown .hljs-selector-tag,
+#cnblogs_post_body.blogpost-body-html .hljs-subst,
+#mainContent .cnblogs-markdown .hljs-subst {
+  color: var(--hl-hue-5);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-literal,
+#mainContent .cnblogs-markdown .hljs-literal {
+  color: var(--hl-hue-1);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-addition,
+#mainContent .cnblogs-markdown .hljs-addition,
+#cnblogs_post_body.blogpost-body-html .hljs-attribute,
+#mainContent .cnblogs-markdown .hljs-attribute,
+#cnblogs_post_body.blogpost-body-html .hljs-meta-string,
+#mainContent .cnblogs-markdown .hljs-meta-string,
+#cnblogs_post_body.blogpost-body-html .hljs-regexp,
+#mainContent .cnblogs-markdown .hljs-regexp,
+#cnblogs_post_body.blogpost-body-html .hljs-string,
+#mainContent .cnblogs-markdown .hljs-string {
+  color: var(--hl-hue-4);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-built_in,
+#mainContent .cnblogs-markdown .hljs-built_in,
+#cnblogs_post_body.blogpost-body-html .hljs-class .hljs-title,
+#mainContent .cnblogs-markdown .hljs-class .hljs-title {
+  color: var(--hl-hue-6-2);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-attr,
+#mainContent .cnblogs-markdown .hljs-attr,
+#cnblogs_post_body.blogpost-body-html .hljs-number,
+#mainContent .cnblogs-markdown .hljs-number,
+#cnblogs_post_body.blogpost-body-html .hljs-selector-attr,
+#mainContent .cnblogs-markdown .hljs-selector-attr,
+#cnblogs_post_body.blogpost-body-html .hljs-selector-class,
+#mainContent .cnblogs-markdown .hljs-selector-class,
+#cnblogs_post_body.blogpost-body-html .hljs-selector-pseudo,
+#mainContent .cnblogs-markdown .hljs-selector-pseudo,
+#cnblogs_post_body.blogpost-body-html .hljs-template-variable,
+#mainContent .cnblogs-markdown .hljs-template-variable,
+#cnblogs_post_body.blogpost-body-html .hljs-type,
+#mainContent .cnblogs-markdown .hljs-type,
+#cnblogs_post_body.blogpost-body-html .hljs-variable,
+#mainContent .cnblogs-markdown .hljs-variable {
+  color: var(--hl-hue-6);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-bullet,
+#mainContent .cnblogs-markdown .hljs-bullet,
+#cnblogs_post_body.blogpost-body-html .hljs-link,
+#mainContent .cnblogs-markdown .hljs-link,
+#cnblogs_post_body.blogpost-body-html .hljs-meta,
+#mainContent .cnblogs-markdown .hljs-meta,
+#cnblogs_post_body.blogpost-body-html .hljs-selector-id,
+#mainContent .cnblogs-markdown .hljs-selector-id,
+#cnblogs_post_body.blogpost-body-html .hljs-symbol,
+#mainContent .cnblogs-markdown .hljs-symbol,
+#cnblogs_post_body.blogpost-body-html .hljs-title,
+#mainContent .cnblogs-markdown .hljs-title {
+  color: var(--hl-hue-2);
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-emphasis,
+#mainContent .cnblogs-markdown .hljs-emphasis {
+  font-style: italic;
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-strong,
+#mainContent .cnblogs-markdown .hljs-strong {
+  font-weight: 700;
+}
+
+#cnblogs_post_body.blogpost-body-html .hljs-link,
+#mainContent .cnblogs-markdown .hljs-link {
+  text-decoration: underline;
+}
+
+/* tinymce */
+#cnblogs_post_body .cnblogs_code {
+  border: none;
+  background-color: var(--hl-base);
+  border-radius: 4px;
+}
+
+#cnblogs_post_body .cnblogs_code pre {
+  padding: 30px 12px 12px;
+  overflow: auto;
+}
+
+#cnblogs_post_body .cnblogs_code pre::before {
+  display: none;
+}
+
+#cnblogs_post_body .cnblogs_code > img {
+  display: none;
+}
+
+#cnblogs_post_body .cnblogs_code span {
+  background-color: var(--hl-base) !important;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='color: #008000;'] {
+  color: var(--hl-mono-3) !important;
+  font-style: italic;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='color: rgba(0, 128, 128, 1);'] {
+  color: red !important;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='background-color: #f5f5f5; color: #000000;'],
+#cnblogs_post_body .cnblogs_code span[style='color: #000000;'] {
+  color: var(--hl-mono-1) !important;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='background-color: #f5f5f5; color: #800000;'] {
+  color: var(--hl-hue-2) !important;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='color: #0000ff;'],
+#cnblogs_post_body .cnblogs_code span[style='background-color: #f5f5f5; color: #0000ff;'] {
+  color: var(--hl-hue-3) !important;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='color: #800000;'],
+#cnblogs_post_body .cnblogs_code span[style='color: #ff0000;'],
+#cnblogs_post_body .cnblogs_code span[style='background-color: #f5f5f5; color: #ff0000;'] {
+  color: var(--hl-hue-4) !important;
+}
+
+#cnblogs_post_body .cnblogs_code span[style='color: #8b0000;'] {
+  color: var(--hl-hue-6) !important;
+}
+
+#cnblogs_post_body .cnblogs_code_collapse,
+#cnblogs_post_body .cnblogs_code_toolbar,
+#cnblogs_post_body .code_img_opened,
+#cnblogs_post_body .code_img_closed {
+  display: none;
+}
+
+#cnblogs_post_body .cnblogs_code_hide {
+  display: block;
+}
+
+.syntaxhighlighter {
+  background: var(--hl-base) !important;
+}
+
+.syntaxhighlighter .line.alt1,
+.syntaxhighlighter .line.alt2 {
+  background-color: var(--hl-base) !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter table tbody {
+  width: 100% !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter table .gutter {
+  padding-bottom: 0 !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter code {
+  background-color: var(--hl-base) !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter .keyword {
+  color: var(--hl-hue-3) !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter .string {
+  color: var(--hl-hue-4) !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter .plain {
+  color: var(--hl-mono-1) !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter .variable {
+  color: var(--hl-mono-1) !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter .comments {
+  color: var(--hl-mono-3) !important;
+  font-style: italic !important;
+}
+
+#cnblogs_post_body .cnblogs_Highlighter .functions {
+  color: var(--hl-hue-2) !important;
+}

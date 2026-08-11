@@ -1,0 +1,142 @@
+:root {
+  --emoji-text-emoji-color: #666;
+  --emoji-bg: #fff;
+  --emoji-border-color: #e1e1e1;
+  --emoji-hover-bg: #f8f8f8;
+  --emoji-hover-border-color: #eee;
+  --emoji-font-emoji-size: 14px;
+}
+
+.qaq-btn {
+  user-select: none;
+  cursor: pointer;
+}
+
+.qaq-wrap {
+  display: none;
+  position: absolute;
+  top: 34px;
+  left: -4%;
+  padding: 8px;
+  background-color: var(--emoji-bg);
+  border: 1px solid var(--emoji-border-color);
+  border-radius: 4px;
+  width: 500px;
+  max-width: 283px;
+  z-index: 3;
+}
+
+.qaq-wrap::before,
+.qaq-wrap::after {
+  position: absolute;
+  content: '';
+  margin: 0;
+  width: 0;
+  height: 0;
+}
+
+.qaq-wrap:after {
+  top: -9px;
+  left: 14px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--emoji-border-color);
+}
+
+.qaq-wrap::before {
+  top: -8px;
+  left: 14px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--emoji-bg);
+  z-index: 1;
+}
+
+.emoji-list {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  padding-right: 2px;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: var(--emoji-font-emoji-size);
+}
+
+.emoji-list .emoji-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: var(--emoji-text-emoji-color);
+  cursor: pointer;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  user-select: none;
+}
+
+.emoji-list .emoji-item img.emoji {
+  width: 20px;
+  height: 20px;
+}
+
+.emoji-list .emoji-item:hover {
+  background-color: var(--emoji-hover-bg);
+  border-color: var(--emoji-hover-border-color);
+}
+
+.emoji-list .emoji-item:hover > .emoji {
+  transform: scale(1.2);
+  transition: transform 0.15s cubic-bezier(0.2, 0, 0.13, 2);
+}
+
+.emoji-list::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.emoji-list::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.emoji-list::-webkit-scrollbar-thumb {
+  background-color: #d2cfcf;
+  border-radius: 4px;
+}
+
+.emoji-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.qaq-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: block;
+  cursor: default;
+  content: ' ';
+  background: transparent;
+  z-index: -1;
+}
+
+.anim-scale-in {
+  animation-name: scale-in;
+  animation-duration: 0.15s;
+  animation-timing-function: cubic-bezier(0.2, 0, 0.13, 1.5);
+}
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
