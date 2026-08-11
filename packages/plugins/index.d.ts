@@ -29,4 +29,10 @@ declare module 'tona-plugins' {
   export function signature(theme: any, devOptions?: any): void
   export function tools(theme: any, devOptions?: any): void
   export function webTag(theme: any, devOptions?: any): void
+  export function createBackTopButton(options?: Record<string, any>): any
+  export function createLikeButton(options?: Record<string, any>): any
+  export function createFollowButton(options?: Record<string, any>): any
+  export function createFavoriteButton(options?: Record<string, any>): any
+  export function createCommentButton(options?: Record<string, any>): any
+  export function createDarkModeButton(options?: Record<string, any>): any
 }

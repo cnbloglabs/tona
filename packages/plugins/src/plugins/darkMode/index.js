@@ -5,13 +5,13 @@ import { getDarkModeOptions } from 'tona-options'
  */
 const MODES = ['dark', 'light', 'system']
 
-const DEFAULT_ICONS = {
+export const DEFAULT_ICONS = {
   dark: 'fa-moon',
   light: 'fa-sun',
   system: 'fa-adjust',
 }
 
-const DEFAULT_TOOLTIPS = {
+export const DEFAULT_TOOLTIPS = {
   dark: '深色',
   light: '浅色',
   system: '跟随系统',
@@ -40,7 +40,7 @@ function setCodeTheme(mode) {
  * @param {string} mode 'dark' | 'light'
  * @param {boolean} withTransition
  */
-function applyMode(mode, withTransition = true) {
+export function applyMode(mode, withTransition = true) {
   setCodeTheme(mode)
   $('html').attr('theme', mode)
 
@@ -93,9 +93,25 @@ function listenSystemMode() {
 }
 
 /**
+ * 配置模式按钮的图标与 tooltip（darkMode 插件 devOptions 与按钮工厂共用入口）
+ * @param {object} [style] { icons?, tooltips?, iconType? }
+ */
+export function setModeButtonStyle(style = {}) {
+  const {
+    icons: nextIcons,
+    tooltips: nextTooltips,
+    iconType: nextIconType,
+  } = style
+
+  icons = { ...DEFAULT_ICONS, ...(nextIcons || {}) }
+  tooltips = { ...DEFAULT_TOOLTIPS, ...(nextTooltips || {}) }
+  iconType = nextIconType || 'className'
+}
+
+/**
  * 更新工具栏按钮图标与 tooltip
  */
-function updateModeButton() {
+export function updateModeButton() {
   const $item = $('.mode-change')
   if (!$item.length) {
     // tools 插件可能晚于本插件渲染按钮，监听按钮出现后再同步
@@ -169,7 +185,7 @@ function stopWatchModeButton() {
  * @param {string} mode 'dark' | 'light' | 'system'
  * @param {boolean} withTransition
  */
-function setMode(mode, withTransition = true) {
+export function setMode(mode, withTransition = true) {
   currentMode = mode
   localStorage.modeType = mode
 
@@ -184,11 +200,20 @@ function setMode(mode, withTransition = true) {
 }
 
 /**
+ * 三态循环切换：dark → light → system → dark（按钮 callback 与插件委托事件共用）
+ * @param {boolean} withTransition
+ */
+export function cycleMode(withTransition = true) {
+  const nextIndex = (MODES.indexOf(currentMode) + 1) % MODES.length
+  setMode(MODES[nextIndex], withTransition)
+}
+
+/**
  * 初始化
  * @param {boolean} darkDefault 无存储且非跟随系统时的默认深色
  * @param {boolean} followSystem 无存储时默认跟随系统
  */
-function init(darkDefault, followSystem) {
+export function init(darkDefault, followSystem) {
   const storage = localStorage.modeType
 
   if (storage === 'dark' || storage === 'light' || storage === 'system') {
@@ -214,8 +239,7 @@ function init(darkDefault, followSystem) {
  */
 function listenToggleButtonClick() {
   $(document).on('click', '.mode-change', () => {
-    const nextIndex = (MODES.indexOf(currentMode) + 1) % MODES.length
-    setMode(MODES[nextIndex])
+    cycleMode()
   })
 }
 
@@ -226,9 +250,11 @@ export function darkMode(_, devOptions) {
     return
   }
 
-  icons = { ...DEFAULT_ICONS, ...(devOptions?.icons || {}) }
-  tooltips = { ...DEFAULT_TOOLTIPS, ...(devOptions?.tooltips || {}) }
-  iconType = devOptions?.iconType || 'className'
+  setModeButtonStyle({
+    icons: devOptions?.icons,
+    tooltips: devOptions?.tooltips,
+    iconType: devOptions?.iconType,
+  })
 
   init(darkDefault, followSystem)
   listenToggleButtonClick()

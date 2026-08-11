@@ -9,7 +9,12 @@ import {
   codeLinenumbers,
   colorMode,
   commentsAvatars,
-  darkMode,
+  createBackTopButton,
+  createCommentButton,
+  createDarkModeButton,
+  createFavoriteButton,
+  createFollowButton,
+  createLikeButton,
   emoji,
   imagePreview,
   license,
@@ -21,6 +26,7 @@ import {
   tools,
   webTag,
 } from 'tona-plugins'
+import { createSidebarToggleToolbarItem } from './modules/sidebar-toggle'
 import './style/index.scss'
 
 Object.values(import.meta.glob('./modules/**/*.js', { eager: true }))
@@ -43,7 +49,6 @@ createTheme()
   .use(webTag, { enable: true })
   .use(musicPlayer, { enable: false })
   .use(live2d, { enable: false })
-  .use(darkMode, { enable: true })
   .use(notice, { enable: false })
   .use(postMessage, { enable: true })
   .use(
@@ -83,31 +88,18 @@ createTheme()
       menuActiveIcon: 'fa-angle-down',
       scrollContainer: '#mainContent',
       toolbarItems: [
-        {
+        // 数组顺序 = 视觉顺序：第一项在顶部、最后一项最靠近 toggle
+        createBackTopButton({
           icon: 'fas fa-rocket rocket-rotate',
           iconType: 'className',
-        },
-        {
-          enable: true,
-          icon: 'fa-moon',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-thumbs-up',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-heart',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-star',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-comment-dots',
-          iconType: 'className',
-        },
+        }),
+        // darkMode 按钮用默认三态图标（深色 fa-moon / 浅色 fa-sun / 跟随系统 fa-adjust）
+        createDarkModeButton({ iconType: 'className' }),
+        createLikeButton({ icon: 'fa-thumbs-up', iconType: 'className' }),
+        createFollowButton({ icon: 'fa-heart', iconType: 'className' }),
+        createFavoriteButton({ icon: 'fa-star', iconType: 'className' }),
+        createCommentButton({ icon: 'fa-comment-dots', iconType: 'className' }),
+        createSidebarToggleToolbarItem(),
       ],
     },
   )

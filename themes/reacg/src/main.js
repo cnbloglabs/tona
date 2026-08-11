@@ -9,6 +9,11 @@ import {
   codeLinenumbers,
   colorMode,
   commentsAvatars,
+  createBackTopButton,
+  createCommentButton,
+  createFavoriteButton,
+  createFollowButton,
+  createLikeButton,
   darkMode,
   donation,
   emoji,
@@ -40,9 +45,21 @@ createTheme()
     enable: true,
     color: '#FB7299',
   })
-  .use(tools, {
-    enable: true,
-  })
+  .use(
+    tools,
+    {
+      enable: true,
+    },
+    {
+      toolbarItems: [
+        createBackTopButton(),
+        createLikeButton(),
+        createFollowButton(),
+        createFavoriteButton(),
+        createCommentButton(),
+      ],
+    },
+  )
   .use(imagePreview, {
     enable: true,
   })

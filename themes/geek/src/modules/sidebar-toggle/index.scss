@@ -1,0 +1,31 @@
+// 双侧栏收起/展开开关按钮：仅 769–1366px 显示
+.toolbar-item.sidebar-toggle {
+  display: none;
+
+  // FA 的 `.fas` 前缀会设 `line-height: 1`，使图标行高塌缩为字号（20px）、
+  // `i` 无法撑满按钮导致图标偏上；恢复 40px 行高并居中，与无前缀项（fa-moon）一致
+  i {
+    line-height: 40px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 769px) and (max-width: 1366px) {
+    display: block;
+  }
+}
+
+#home {
+  transition: grid-template-columns 0.3s;
+}
+
+// 收起态：仅 769–1366px 生效，侧栏轨道归零、主区占满全宽
+@media screen and (min-width: 769px) and (max-width: 1366px) {
+  #home.is-sidebars-collapsed {
+    grid-template-columns: 0 1fr 1fr 0;
+  }
+
+  // 左栏 0 宽后消除 border-right 露线
+  #home.is-sidebars-collapsed #left-side {
+    border-right-color: transparent;
+  }
+}

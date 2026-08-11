@@ -4,7 +4,12 @@ import {
   codeHighlight,
   codeLinenumbers,
   codeTrafficLight,
-  darkMode,
+  createBackTopButton,
+  createCommentButton,
+  createDarkModeButton,
+  createFavoriteButton,
+  createFollowButton,
+  createLikeButton,
   donation,
   emoji,
   license,
@@ -18,7 +23,6 @@ theme
   .use(clickEffects, { enable: true })
   .use(emoji, { enable: true })
   .use(license, { enable: true })
-  .use(darkMode, { enable: true })
   .use(codeTrafficLight, { enable: true })
   .use(codeHighlight, { enable: true })
   .use(codeLinenumbers, { enable: true })
@@ -37,31 +41,20 @@ theme
       menuActiveIcon: 'fa-angle-down',
       scrollContainer: 'html',
       toolbarItems: [
-        {
+        // 数组顺序 = 视觉顺序：第一项在顶部、最后一项最靠近 toggle
+        createBackTopButton({
           icon: 'fa-rocket rocket-rotate',
           iconType: 'className',
-        },
-        {
-          enable: true,
-          icon: 'fa-moon',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-thumbs-up',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-heart',
-          iconType: 'className',
-        },
-        {
-          icon: 'fa-star',
-          iconType: 'className',
-        },
-        {
+        }),
+        // darkMode 按钮自包含（默认三态图标：深色 fa-moon / 浅色 fa-sun / 跟随系统 fa-adjust）
+        createDarkModeButton({ iconType: 'className' }),
+        createLikeButton({ icon: 'fa-thumbs-up', iconType: 'className' }),
+        createFollowButton({ icon: 'fa-heart', iconType: 'className' }),
+        createFavoriteButton({ icon: 'fa-star', iconType: 'className' }),
+        createCommentButton({
           icon: 'fa-comment-dots',
           iconType: 'className',
-        },
+        }),
       ],
     },
   )

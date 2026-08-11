@@ -5,6 +5,11 @@ import {
   codeCopy,
   codeHighlight,
   codeLinenumbers,
+  createBackTopButton,
+  createCommentButton,
+  createFavoriteButton,
+  createFollowButton,
+  createLikeButton,
   donation,
   emoji,
   footer,
@@ -39,4 +44,16 @@ createTheme()
   .use(notice, { enable: true })
   .use(signature, { enable: true })
   .use(commentsAvatars, { enable: true })
-  .use(tools, { enable: true })
+  .use(
+    tools,
+    { enable: true },
+    {
+      toolbarItems: [
+        createBackTopButton(),
+        createLikeButton(),
+        createFollowButton(),
+        createFavoriteButton(),
+        createCommentButton(),
+      ],
+    },
+  )

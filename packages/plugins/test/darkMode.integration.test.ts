@@ -73,7 +73,12 @@ describe('darkMode 集成：跟随系统 tooltip 同步', () => {
       {
         toolbarItems: [
           { icon: 'fas fa-rocket rocket-rotate', iconType: 'className' },
-          { enable: true, icon: 'fa-moon', iconType: 'className' },
+          {
+            enable: true,
+            icon: 'fa-moon',
+            iconType: 'className',
+            className: 'mode-change',
+          },
           { icon: 'fa-thumbs-up', iconType: 'className' },
         ],
       },

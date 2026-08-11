@@ -28,6 +28,10 @@ geek 左侧栏在视口 ≤1366px 时的纯图标态：`#cnblog-nav` 只显示�
 
 Collapsed Sidebar 下挂在 `#cnblog-nav` 末尾 `fa-link` 图标上的浮层：列出 Custom Links，支持 hover 与 click 打开/关闭。
 
+## Sidebar Toggle
+
+geek 主题在 769–1366px 下收起/展开双侧栏的开关（tools 浮动工具栏内 toolbar item，`className` 为 `sidebar-toggle`）：收起态 `#left-side` 与 `#sideBar` 全部隐藏、主区占满全宽；展开态恢复 Collapsed Sidebar + 右栏 280px。图标随状态互换（显示 `fa-compress` / 隐藏 `fa-expand`），tooltip 表示当前状态（展开态「侧栏展开」/ 收起态「侧栏收起」），localStorage 持久化。对应 effort 见 `docs/monorail/geek-sidebar-toggle/`。
+
 ## Theme Dist
 
 主题经 `tona-vite` 构建后的可分发产物目录（通常为 `dist/`）。默认形态为带 File Hash 的 IIFE JS + 独立 CSS；可选 Inline CSS Dist。GitHub Release 产物契约（ADR-002）为无 hash 双文件 `{themeName}.min.js` + `{themeName}.min.css`。
@@ -51,3 +55,7 @@ dev 模式下 Vite 启动时把模块图中真实 node_modules 依赖预先打�
 ## Dev Scan Entry
 
 Vite 依赖扫描器在 dev 启动时爬取依赖图的入口文件。`computeEntries` 优先级：`optimizeDeps.entries` → `build.rollupOptions.input` → 兜底 glob `**/*.html`。主题场景下由 `tona-vite` 注入 `optimizeDeps.entries` 指向 `src/main.(ts|js)`，使扫描器经 `pluginContainer.resolveId`（alias/插件链生效）发现全部真实依赖。
+
+## Toolbar Button
+
+tools 浮动工具栏内一个可插拔、可独立定义的按钮单元（即原 toolbar item 的规范称谓）：自包含 `{ enable, page, icon, iconType, tooltip, className, callback, setup? }`。按钮由工厂函数（如 `createBackTopButton`）创建，主题以 `toolbarItems` 声明式列表选择；未引入的按钮代码不进入主题产物（tree-shaking）。对应 effort 见 `docs/monorail/tools-buttons/`。
