@@ -1,0 +1,144 @@
+@import '@tona-plugins/src/plugins/footer/index.css';
+@import '@tona-plugins/src/plugins/codeCopy/index.css';
+@import '@tona-plugins/src/plugins/codeLinenumbers/index.css';
+@import '@tona-plugins/src/plugins/license/index.css';
+@import '@tona-plugins/src/plugins/commentsAvatars/index.css';
+@import '@tona-plugins/src/plugins/tools/index.css';
+@import '@tona-plugins/src/plugins/darkMode/index.css';
+@import '@tona-plugins/src/plugins/codeHighlight/index.css';
+@import '@tona-plugins/src/plugins/imagePreview/index.css';
+@import '@tona-plugins/src/plugins/emoji/index.css';
+@import '@tona-plugins/src/plugins/codeLang/index.css';
+
+:root {
+  --footer-background: var(--color-basic-700);
+  --post-signature-primary: var(--themeColor);
+  --post-signature-background: var(--color-basic-100);
+  --post-signature-border-radius: 2px;
+  --tool-menu-background: var(--color-basic-50);
+  --emoji-text-emoji-color: var(--color-basic-800);
+  --emoji-bg: var(--emoji-bg);
+  --emoji-border-color: var(--color-basic-300);
+  --emoji-hover-bg: var(--color-basic-100);
+  --emoji-hover-border-color: var(--color-basic-200);
+}
+
+.custom-toolbar .toolbar-item i::before {
+  font-weight: 700;
+}
+
+#catalog {
+  position: sticky;
+  top: 6em;
+  margin: 0 8px;
+  width: 260px;
+  height: max-content;
+  max-height: 80vh;
+  overflow: auto;
+}
+#catalog .catalog-title {
+  font-size: 130%;
+}
+#catalog li {
+  font-size: 0.85em;
+  cursor: pointer;
+  color: var(--color-basic-600);
+  display: block;
+  margin-left: 0.75em;
+  margin-top: 0.8em;
+  padding-right: 10px;
+}
+#catalog li:hover {
+  color: var(--themeColor);
+}
+#catalog li::before {
+  content: ' ';
+  border-radius: 100%;
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border: 1px solid var(--color-basic-600);
+  margin-right: 6px;
+}
+#catalog li.catalog-active {
+  color: var(--themeColor);
+  font-weight: bold;
+}
+#catalog li.catalog-active::before {
+  content: ' ';
+  border-radius: 100%;
+  width: 5px;
+  height: 5px;
+  display: inline-block;
+  border: 1px solid var(--themeColor);
+  margin-right: 6px;
+  background-color: var(--themeColor);
+}
+#catalog .h2-list ~ .h3-list {
+  margin-left: 3em;
+}
+#catalog .h3-list ~ .h4-list {
+  margin-left: 4em;
+}
+#catalog .h4-list ~ .h5-list {
+  margin-left: 5em;
+}
+#catalog .h5-list ~ .h6-list {
+  margin-left: 6em;
+}
+
+#post-signature {
+  width: 99%;
+  padding: 12px 20px;
+  background-color: var(--color-basic-50);
+  border: 2px solid var(--themeColor);
+  box-shadow: 2px 2px 0 var(--themeColor);
+  font-size: 13px;
+  border-radius: 2px;
+}
+
+/* copy code */
+.cnblogs_code,
+.cnblogs_Highlighter {
+  position: relative;
+}
+.cnblogs_code .copy-btns,
+.cnblogs_Highlighter .copy-btns {
+  z-index: 1;
+}
+
+.copy-btns {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  width: 86px;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 4px 1px 8px;
+  border-radius: 4px;
+  color: var(--color-basic-600);
+}
+.copy-btns:before {
+  content: '\f0c5';
+  margin-right: 8px;
+  font-weight: 500;
+}
+.copy-btns:hover {
+  background: var(--color-basic-300);
+  transition: background 0.2s;
+}
+
+/* code language */
+.awes-lang {
+  position: absolute;
+  right: 98px;
+  top: 13px;
+  height: 14px;
+  line-height: 1.2;
+  padding-right: 14px;
+  margin-right: 4px;
+  border-right: 1px solid var(--color-basic-300);
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--color-copy-btn);
+}

@@ -1,0 +1,200 @@
+@import '@tona-plugins/src/plugins/codeTrafficLight/index.css';
+@import '@tona-plugins/src/plugins/codeHighlight/index.css';
+@import '@tona-plugins/src/plugins/codeLinenumbers/index.css';
+@import '@tona-plugins/src/plugins/codeCopy/index.css';
+@import '@tona-plugins/src/plugins/codeLang/index.css';
+@import '@tona-plugins/src/plugins/postMessage/index.css';
+@import '@tona-plugins/src/plugins/commentsAvatars/index.css';
+@import '@tona-plugins/src/plugins/signature/index.css';
+@import '@tona-plugins/src/plugins/emoji/index.css';
+@import '@tona-plugins/src/plugins/imagePreview/index.css';
+@import '@tona-plugins/src/plugins/notice/index.css';
+@import '@tona-plugins/src/plugins/license/index.css';
+@import '@tona-plugins/src/plugins/tools/index.css';
+@import '@tona-plugins/src/plugins/darkMode/index.css';
+@import '@tona-plugins/src/plugins/clickEffects/index.css';
+@import '@tona-plugins/src/plugins/musicPlayer/index.css';
+
+:root {
+  --post-message-categories-background: #f13a3a;
+  --post-message-tags-background-1: #22a6b3;
+  --post-message-tags-background-2: #0097e6;
+  --post-message-tags-background-3: #fbc531;
+  --post-message-tags-background-4: #10ac84;
+  --post-message-color-tags: var(--geek-color-10);
+  --post-message-color-message: var(--geek-color-8);
+  --post-message-color-categories: #fff;
+  --signature-padding: 1rem 14px;
+  --signature-font-size: 1em;
+  --emoji-text-emoji-color: var(--geek-color-6);
+  --emoji-bg: var(--geek-color-1);
+  --emoji-border-color: var(--geek-color-3);
+  --emoji-hover-bg: var(--geek-color-3);
+  --emoji-hover-border-color: var(--color-primary);
+  --imagebox-background: var(--geek-color-2);
+  --post-signature-primary: var(--color-primary);
+  --post-signature-background: var(--geek-color-2);
+  --post-signature-border-radius: 2px;
+  --tool-menu-background: var(--geek-color-2);
+  --tool-menu-color: #fff;
+  --player-body-background: var(--geek-color-6);
+}
+
+/* comments avatars */
+.custom-comment-avatar {
+  position: relative;
+}
+.custom-comment-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.custom-comments-author .custom-comment-avatar::after {
+  position: absolute;
+  bottom: 11px;
+  right: 5px;
+  content: '\f058';
+  color: #4ac7ff;
+  background-color: #fff;
+  line-height: 1em;
+  border-radius: 50%;
+  margin-right: 0;
+  font-size: 80%;
+}
+
+/* postMessage */
+.message-top .message-categories a,
+.message-top .message-tags a {
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+/* image box */
+.medium-zoom-image--opened {
+  z-index: 41;
+}
+
+/* toolMenu */
+.custom-toolbar {
+  z-index: 9;
+}
+
+.rocket-rotate {
+  position: relative;
+  top: 12px;
+  transform: rotate(-45deg);
+}
+
+.toolbar-item {
+  box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
+}
+
+.custom-drag-menu {
+  z-index: 3;
+}
+
+.medium-zoom-overlay {
+  z-index: 2;
+}
+
+/* click */
+#click-effects {
+  z-index: 6;
+}
+
+/* player */
+body .aplayer.aplayer-fixed .aplayer-lrc {
+  bottom: 30px;
+}
+
+/* catalog */
+#catalog {
+  padding: 25px;
+  font-size: 14px;
+  overflow-x: hidden;
+  word-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+#catalog .catalog-title {
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  color: var(--geek-color-9);
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: normal;
+  cursor: pointer;
+}
+#catalog ul {
+  border-left: 1px solid var(--geek-color-2);
+}
+#catalog ul li {
+  color: var(--geek-color-10);
+  display: flex;
+  align-items: flex-start;
+  line-height: 1.8;
+}
+#catalog ul li::before {
+  position: relative;
+  right: 5px;
+  display: block;
+  width: 7px;
+  height: 7px;
+  content: '';
+  border-radius: 50%;
+  border: 1px solid var(--color-primary);
+  background-color: var(--geek-color-1);
+  margin-right: 4px;
+  margin-top: 0.5em;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+#catalog ul li:hover {
+  color: var(--geek-color-10);
+}
+#catalog ul li a {
+  display: inline-block;
+  width: 100%;
+}
+#catalog ul li a .icon {
+  width: 1.2em;
+  height: 1.8em;
+}
+#catalog ul .h1-list {
+  font-size: 16px;
+}
+#catalog ul .h2-list {
+  font-size: 14px;
+}
+#catalog ul .h3-list,
+#catalog ul .h4-list,
+#catalog ul .h5-list,
+#catalog ul .h6-list {
+  font-size: 12px;
+}
+#catalog ul .h1-list ~ .h2-list {
+  margin-left: 1em;
+  font-size: 14px;
+}
+#catalog ul .h2-list ~ .h3-list {
+  margin-left: 2em;
+}
+#catalog ul .h3-list ~ .h4-list {
+  margin-left: 3em;
+}
+#catalog ul .h4-list ~ .h5-list {
+  margin-left: 4em;
+}
+#catalog ul .h5-list ~ .h6-list {
+  margin-left: 5em;
+}
+#catalog ul .catalog-active {
+  color: var(--color-primary);
+  transition: all 0.3s;
+}
+#catalog ul .catalog-active::before {
+  transform: scale(1) translateX(0);
+  background-color: var(--color-primary);
+}
