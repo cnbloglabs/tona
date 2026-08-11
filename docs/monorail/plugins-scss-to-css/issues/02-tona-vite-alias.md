@@ -1,11 +1,12 @@
 # 02 — tona-vite 注入 @tona-plugins alias
 
-Status: claimed
+Status: done
 Blocked by: None
 
 ## Comments
 
 Batch 2026-08-12: start — be935e14
+Batch 2026-08-12: done — 5e30608f（config() 注入 resolve.alias['@tona-plugins']；alias.test.ts 6 passed 含真实 build 集成：darkMode css 经 alias 内联成功）
 
 ## What to build
 
