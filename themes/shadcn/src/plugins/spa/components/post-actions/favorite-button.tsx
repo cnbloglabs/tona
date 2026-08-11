@@ -15,10 +15,7 @@ export function FavoriteButton() {
       {isPending ? (
         <Loader2 size={18} className="animate-spin" />
       ) : (
-        <Star
-          size={18}
-          className={data?.isFavorite ? 'fill-yellow-500 text-yellow-500' : ''}
-        />
+        <Star size={18} />
       )}
       <span>{data?.isFavorite ? '已收藏' : '收藏'}</span>
     </Button>

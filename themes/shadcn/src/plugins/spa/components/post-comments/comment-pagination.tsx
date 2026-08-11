@@ -4,7 +4,7 @@ import { useCommentPaginationItems } from './hooks'
 import type { CommentPaginationItem } from './types'
 
 const commentPaginationItemVariants = cva(
-  'no-underline! inline-flex items-center justify-center gap-1 rounded-md px-2 py-2 font-medium text-xs sm:px-4 sm:text-sm',
+  'no-underline! inline-flex items-center justify-center gap-1 px-2 py-2 font-medium text-xs sm:px-4 sm:text-sm',
   {
     variants: {
       variant: {

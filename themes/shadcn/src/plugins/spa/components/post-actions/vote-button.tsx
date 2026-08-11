@@ -35,10 +35,7 @@ export function VoteButton() {
       {isPending ? (
         <Loader2 size={18} className="animate-spin" />
       ) : (
-        <ThumbsUp
-          size={18}
-          className={data?.isLiked ? 'fill-green-500 text-green-500' : ''}
-        />
+        <ThumbsUp size={18} />
       )}
       <span>{`${data?.diggCount || 0} 推荐`}</span>
     </Button>

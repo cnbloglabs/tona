@@ -68,7 +68,7 @@ export function CommentItemComponent({ comment }: CommentItemProps) {
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className="rounded-md px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
+          className="px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
           onClick={() => {
             window.GetCommentBody(comment.id)
           }}
@@ -77,7 +77,7 @@ export function CommentItemComponent({ comment }: CommentItemProps) {
         </button>
         <button
           type="button"
-          className="rounded-md px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
+          className="px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
           onClick={() => {
             window.ReplyComment(comment.id, comment.replyToId)
           }}
@@ -86,7 +86,7 @@ export function CommentItemComponent({ comment }: CommentItemProps) {
         </button>
         <button
           type="button"
-          className="rounded-md px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
+          className="px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
           onClick={() => {
             window.DelComment(comment.id, $(), window.currentPostId)
           }}
@@ -95,7 +95,7 @@ export function CommentItemComponent({ comment }: CommentItemProps) {
         </button>
         <button
           type="button"
-          className="rounded-md px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
+          className="px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
           onClick={() => {
             window.QuoteComment(comment.id, comment.replyToId)
           }}
@@ -104,7 +104,7 @@ export function CommentItemComponent({ comment }: CommentItemProps) {
         </button>
         <button
           type="button"
-          className="ml-auto flex items-center gap-1 rounded-md px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
+          className="ml-auto flex items-center gap-1 px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
           onClick={() => {
             const mockVoteDom = document.createElement('div')
             mockVoteDom.innerHTML = `
@@ -120,7 +120,7 @@ export function CommentItemComponent({ comment }: CommentItemProps) {
         </button>
         <button
           type="button"
-          className="flex items-center gap-1 rounded-md px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
+          className="flex items-center gap-1 px-2 py-1 text-muted-foreground text-xs transition-colors hover:bg-muted hover:text-foreground"
           onClick={() => {
             const mockVoteDom = document.createElement('div')
             mockVoteDom.innerHTML = `

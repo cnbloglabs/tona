@@ -32,7 +32,7 @@ export function HoverCard({
   return (
     <div
       className={cn(
-        'fixed top-18 right-0 z-1000 -mt-1 flex w-72 flex-col text-xs',
+        'fixed top-18 right-2 z-1000 -mt-1 flex w-72 flex-col text-xs',
         'scrollbar-none overflow-hidden',
         'transition-transform duration-200 ease-in-out',
         className,

@@ -102,7 +102,6 @@
        justify-center
        gap-2
        whitespace-nowrap
-       rounded-md
        text-sm
        font-medium
        transition-all
@@ -136,7 +135,6 @@
        justify-center
        gap-2
        whitespace-nowrap
-       rounded-md
        text-sm
        font-medium
        disabled:pointer-events-none

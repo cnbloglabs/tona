@@ -13,12 +13,7 @@ export function FollowButton() {
 
   const icon = (() => {
     if (isPending) return <Loader2 size={18} className="animate-spin" />
-    return (
-      <Heart
-        size={18}
-        className={isFollowed ? 'fill-red-500 text-red-500' : ''}
-      />
-    )
+    return <Heart size={18} />
   })()
 
   return (
