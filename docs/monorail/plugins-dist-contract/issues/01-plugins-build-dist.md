@@ -1,11 +1,12 @@
 # 01 — plugins 包产物化：build + dist 扁平产物 + 入口契约
 
-- Status: claimed
+- Status: done
 - Blocked by: None
 
 ## Comments
 
 Batch 2026-08-12: start — 28a9bd31
+done — (pack 段 + copy-css 插件 + 入口契约；dist-contract.test.ts 3 用例 + 现有 64 测试全绿；buttons.test.ts mock 接缝随 dist bundle 调整——行为断言改从 src 导入，主入口仅导出契约断言，见文件头注释)
 
 ## What to build
 
