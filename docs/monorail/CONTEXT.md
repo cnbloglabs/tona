@@ -63,3 +63,11 @@ tools 浮动工具栏内一个可插拔、可独立定义的按钮单元（即�
 ## Plugin CSS Variables
 
 plugins 包内插件样式的可配置 CSS 变量，命名 `--<插件slug>-<kebab-case-key>`（如 `--post-message-categories-background`）。默认值在插件 css 文件顶部 `:root` 声明块集中定义，规则体以 `var(--xxx)` 引用；主题通过覆盖同名变量定制插件样式，替代原 sass `@use ... with()` 配置机制。对应 ADR-003 与 effort `docs/monorail/plugins-scss-to-css/`。
+
+## Package Entry Contract
+
+monorepo 包的统一入口规则：所有包（含 plugins）`exports` 一律指向 `dist/` 产物，无源码分发包；纯 JS/CSS 包同样产物分发。plugins 的 dist 为扁平布局（`dist/<plugin>/index.css`，不保留 `src/plugins/` 前缀）。对应 ADR-004 与 effort `docs/monorail/plugins-dist-contract/`。
+
+## Plugin CSS Subpath
+
+插件 CSS 的裸包名引用 `tona-plugins/<plugin>/index.css`（如 `@import 'tona-plugins/catalog/index.css'`），经 `exports` 通配 `"./*": "./dist/*"` 映射到 `dist/<plugin>/index.css`。替代原 tona-vite 内置 `@tona-plugins` alias（已移除）；残留旧引用映射到不存在的路径，显式报错。对应 ADR-004。
