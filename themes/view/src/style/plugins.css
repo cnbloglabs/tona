@@ -1,14 +1,14 @@
-@import '@tona-plugins/src/plugins/footer/index.css';
-@import '@tona-plugins/src/plugins/codeCopy/index.css';
-@import '@tona-plugins/src/plugins/codeLinenumbers/index.css';
-@import '@tona-plugins/src/plugins/license/index.css';
-@import '@tona-plugins/src/plugins/commentsAvatars/index.css';
-@import '@tona-plugins/src/plugins/tools/index.css';
-@import '@tona-plugins/src/plugins/darkMode/index.css';
-@import '@tona-plugins/src/plugins/codeHighlight/index.css';
-@import '@tona-plugins/src/plugins/imagePreview/index.css';
-@import '@tona-plugins/src/plugins/emoji/index.css';
-@import '@tona-plugins/src/plugins/codeLang/index.css';
+@import 'tona-plugins/footer/index.css';
+@import 'tona-plugins/codeCopy/index.css';
+@import 'tona-plugins/codeLinenumbers/index.css';
+@import 'tona-plugins/license/index.css';
+@import 'tona-plugins/commentsAvatars/index.css';
+@import 'tona-plugins/tools/index.css';
+@import 'tona-plugins/darkMode/index.css';
+@import 'tona-plugins/codeHighlight/index.css';
+@import 'tona-plugins/imagePreview/index.css';
+@import 'tona-plugins/emoji/index.css';
+@import 'tona-plugins/codeLang/index.css';
 
 :root {
   --footer-background: var(--color-basic-700);

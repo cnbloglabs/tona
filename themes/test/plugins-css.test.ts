@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vite-plus/test'
  * 主题下游迁移（issue 03）结构断言：
  * - 4 个使用插件的主题（geek/reacg/simple/view）src/style/plugins.scss → plugins.css，
  *   原 plugins.scss 已删除
- * - 每个 plugins.css 顶部为插件 css @import 列表（@tona-plugins 模块 id，不用
+ * - 每个 plugins.css 顶部为插件 css @import 列表（裸包名模块 id，不用
  *   /node_modules/ 绝对路径）
  * - :root 覆盖块含原 with() 配置的全部 key（值不变，含 var(--xxx) 引用）
  * - 主题 index.scss 引用已改为 @import './plugins.css'
@@ -135,7 +135,7 @@ describe('主题下游迁移：plugins.scss → plugins.css', () => {
     }
   })
 
-  it('plugins.css 顶部为 @tona-plugins 模块 id 的插件 @import 列表（顺序同原 @use）', () => {
+  it('plugins.css 顶部为裸包名模块 id 的插件 @import 列表（顺序同原 @use）', () => {
     for (const theme of themes) {
       const css = fs.readFileSync(path.join(styleDir(theme), 'plugins.css'), 'utf8')
       const lines = css.split('\n').filter((l) => l.trim().startsWith('@import'))
@@ -143,8 +143,8 @@ describe('主题下游迁移：plugins.scss → plugins.css', () => {
         expectedImportCounts[theme],
       )
       for (const line of lines) {
-        expect(line, `${theme}: 应使用 @tona-plugins 模块 id`).toContain(
-          "@import '@tona-plugins/src/plugins/",
+        expect(line, `${theme}: 应使用裸包名模块 id`).toContain(
+          "@import 'tona-plugins/",
         )
         expect(line, `${theme}: 不应使用 /node_modules/ 绝对路径`).not.toContain(
           '/node_modules/',
