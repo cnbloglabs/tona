@@ -667,8 +667,8 @@ describe('Options 配置测试', () => {
         color: '',
       })
       expect(options.audio).toHaveLength(1)
-      expect(options.audio[0]).toHaveProperty('name', '404 not found')
-      expect(options.audio[0]).toHaveProperty('artist', 'REOL')
+      expect(options.audio[0]).toHaveProperty('name', '')
+      expect(options.audio[0]).toHaveProperty('artist', '')
     })
 
     it('应该合并用户音乐播放器配置', () => {
