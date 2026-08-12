@@ -21,21 +21,24 @@
     "directory": "packages/plugins"
   },
   "files": [
-    "index.d.ts",
-    "src"
+    "dist",
+    "index.d.ts"
   ],
   "type": "module",
-  "main": "./src/index.js",
-  "module": "./src/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./index.d.ts",
   "exports": {
     ".": {
       "types": "./index.d.ts",
-      "import": "./src/index.js"
-    }
+      "import": "./dist/index.js"
+    },
+    "./*": "./dist/*"
   },
   "scripts": {
-    "dev": "vp dev"
+    "build": "vp pack",
+    "dev": "vp pack --watch",
+    "dev:example": "vp dev"
   },
   "dependencies": {
     "notyf": "catalog:",

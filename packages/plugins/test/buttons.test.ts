@@ -2,10 +2,14 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vite-plus/test'
 
 /**
  * 通用按钮工厂单测（seam A，纯对象断言，无真实 DOM）：
- * - 5 个工厂从 tona-plugins 主入口可 import
+ * - 5 个工厂从 tona-plugins 主入口可 import（跟随 exports 到 dist bundle）
  * - 每个工厂返回按钮对象：默认字段正确、options 覆盖生效、callback 存在
  * - callback 调用对应行为：likePost/toast 以 vi.fn 桩替，
  *   window.follow/window.AddToWz 以 vi.fn 桩替，滚动行为以 $ 桩替
+ *
+ * 注（ADR-004 产物化后）：dist/index.js 为单文件 bundle，toast/cnblog 已内联，
+ * src 路径级 vi.mock 无法再拦截 bundle 内部模块，故行为断言的工厂改从
+ * src 导入（与 vi.mock 共享同一模块 ID）；tona-plugins 主入口仅用于导出契约断言。
  */
 
 // toast 模块依赖 notyf，单测中整体桩替（其余模块仅在插件函数体内使用 toast，不影响加载）
@@ -48,11 +52,12 @@ function createJQueryMock() {
 
 async function loadButtons() {
   vi.resetModules()
-  const mod = await import('tona-plugins')
-  // 与按钮模块共享同一 mock 实例（同一模块 ID、同一缓存）
+  const bundle = await import('tona-plugins')
+  // 工厂从 src 导入：与 vi.mock 的 toast/cnblog 共享同一模块 ID、同一缓存
+  const buttons = await import('../src/plugins/tools/buttons')
   const { toast } = await import('../src/plugins/toast')
   const { likePost } = await import('../src/utils/cnblog')
-  return { mod, toast, likePost }
+  return { bundle, buttons, toast, likePost }
 }
 
 let scrollState: ReturnType<typeof createJQueryMock>['state']
@@ -77,7 +82,7 @@ describe('通用按钮工厂（seam A）', () => {
   })
 
   it('5 个工厂均从 tona-plugins 主入口具名导出', async () => {
-    const { mod } = await loadButtons()
+    const { bundle } = await loadButtons()
     for (const name of [
       'createBackTopButton',
       'createLikeButton',
@@ -85,14 +90,14 @@ describe('通用按钮工厂（seam A）', () => {
       'createFavoriteButton',
       'createCommentButton',
     ]) {
-      expect(typeof mod[name]).toBe('function')
+      expect(typeof bundle[name]).toBe('function')
     }
   })
 
   describe('createBackTopButton', () => {
     it('默认字段正确，callback 存在且滚动到顶部', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createBackTopButton()
+      const { buttons } = await loadButtons()
+      const btn = buttons.createBackTopButton()
 
       expect(btn).toMatchObject({
         enable: true,
@@ -110,16 +115,16 @@ describe('通用按钮工厂（seam A）', () => {
     })
 
     it('未提供 scrollContainer 时默认滚动 html', async () => {
-      const { mod } = await loadButtons()
-      mod.createBackTopButton().callback({})
+      const { buttons } = await loadButtons()
+      buttons.createBackTopButton().callback({})
       expect(scrollState.animateCalls).toEqual([
         { selector: 'html', props: { scrollTop: 0 }, duration: 200 },
       ])
     })
 
     it('options 覆盖 icon/iconType/tooltip/className/page/enable', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createBackTopButton({
+      const { buttons } = await loadButtons()
+      const btn = buttons.createBackTopButton({
         icon: 'fa-rocket',
         iconType: 'className',
         tooltip: '返回顶部',
@@ -139,9 +144,9 @@ describe('通用按钮工厂（seam A）', () => {
     })
 
     it('callback 由闭包绑定，不接受 options 覆盖', async () => {
-      const { mod } = await loadButtons()
+      const { buttons } = await loadButtons()
       const passed = vi.fn()
-      const btn = mod.createBackTopButton({ callback: passed })
+      const btn = buttons.createBackTopButton({ callback: passed })
 
       btn.callback({ scrollContainer: 'html' })
       expect(passed).not.toHaveBeenCalled()
@@ -151,8 +156,8 @@ describe('通用按钮工厂（seam A）', () => {
 
   describe('createLikeButton', () => {
     it('默认字段正确，callback toast 推荐成功 + likePost', async () => {
-      const { mod, toast, likePost } = await loadButtons()
-      const btn = mod.createLikeButton()
+      const { buttons, toast, likePost } = await loadButtons()
+      const btn = buttons.createLikeButton()
 
       expect(btn).toMatchObject({
         enable: true,
@@ -169,8 +174,8 @@ describe('通用按钮工厂（seam A）', () => {
     })
 
     it('options 覆盖 icon/tooltip/className/page/enable', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createLikeButton({
+      const { buttons } = await loadButtons()
+      const btn = buttons.createLikeButton({
         icon: 'fa-thumbs-up',
         iconType: 'className',
         tooltip: '点赞',
@@ -192,8 +197,8 @@ describe('通用按钮工厂（seam A）', () => {
 
   describe('createFollowButton', () => {
     it('默认字段正确，callback toast 关注成功 + window.follow', async () => {
-      const { mod, toast } = await loadButtons()
-      const btn = mod.createFollowButton()
+      const { buttons, toast } = await loadButtons()
+      const btn = buttons.createFollowButton()
 
       expect(btn).toMatchObject({
         enable: true,
@@ -210,8 +215,8 @@ describe('通用按钮工厂（seam A）', () => {
     })
 
     it('options 覆盖 icon/tooltip/className/page/enable', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createFollowButton({
+      const { buttons } = await loadButtons()
+      const btn = buttons.createFollowButton({
         icon: 'fa-heart',
         iconType: 'className',
         tooltip: '关注博主',
@@ -233,8 +238,8 @@ describe('通用按钮工厂（seam A）', () => {
 
   describe('createFavoriteButton', () => {
     it('默认字段正确，callback 调用 window.AddToWz', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createFavoriteButton()
+      const { buttons } = await loadButtons()
+      const btn = buttons.createFavoriteButton()
 
       expect(btn).toMatchObject({
         enable: true,
@@ -250,8 +255,8 @@ describe('通用按钮工厂（seam A）', () => {
     })
 
     it('options 覆盖 icon/tooltip/className/page/enable', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createFavoriteButton({
+      const { buttons } = await loadButtons()
+      const btn = buttons.createFavoriteButton({
         icon: 'fa-bookmark',
         iconType: 'className',
         tooltip: '加入收藏',
@@ -273,8 +278,8 @@ describe('通用按钮工厂（seam A）', () => {
 
   describe('createCommentButton', () => {
     it('默认字段正确，callback 滚动到评论输入框', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createCommentButton()
+      const { buttons } = await loadButtons()
+      const btn = buttons.createCommentButton()
 
       expect(btn).toMatchObject({
         enable: true,
@@ -292,16 +297,16 @@ describe('通用按钮工厂（seam A）', () => {
     })
 
     it('未提供 scrollContainer 时默认滚动 html', async () => {
-      const { mod } = await loadButtons()
-      mod.createCommentButton().callback({})
+      const { buttons } = await loadButtons()
+      buttons.createCommentButton().callback({})
       expect(scrollState.animateCalls).toEqual([
         { selector: 'html', props: { scrollTop: 9999 }, duration: 300 },
       ])
     })
 
     it('options 覆盖 icon/tooltip/className/page/enable', async () => {
-      const { mod } = await loadButtons()
-      const btn = mod.createCommentButton({
+      const { buttons } = await loadButtons()
+      const btn = buttons.createCommentButton({
         icon: 'fa-comment',
         iconType: 'className',
         tooltip: '评论一下',
