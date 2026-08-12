@@ -1,11 +1,12 @@
 # 03 — 移除 tona-vite 的 @tona-plugins alias，重写 alias.test.ts
 
-- Status: claimed
+- Status: done
 - Blocked by: 01, 02
 
 ## Comments
 
 Batch 2026-08-12: start — 28a9bd31
+done — (config() 不再注入 resolve.alias；alias.test.ts 删 5 注入断言、集成用例改裸包名经 exports 通配解析；tona-vite 13 测试 + 5 主题构建全绿；全仓 grep 无 @tona-plugins 残留)
 
 ## What to build
 
