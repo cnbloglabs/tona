@@ -100,14 +100,6 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
       const bundlerOptions =
         buildConfig.rolldownOptions ?? buildConfig.rollupOptions
 
-      // Preserve object-form user aliases; array-form is left for Vite's own
-      // deep-merge to keep (an array spread into an object would break it).
-      const userAlias = config.resolve?.alias
-      const existingAlias =
-        userAlias && typeof userAlias === 'object' && !Array.isArray(userAlias)
-          ? userAlias
-          : {}
-
       const result: UserConfig = {
         css: {
           preprocessorOptions: {
@@ -115,18 +107,6 @@ export default function tona(options: TonaPluginOptions = {}): Plugin {
               ...config.css?.preprocessorOptions?.scss,
               charset: config.css?.preprocessorOptions?.scss?.charset ?? false,
             },
-          },
-        },
-        resolve: {
-          // Bare css @import '@tona-plugins/...' ids are resolved through this
-          // alias (postcss-import) to the installed tona-plugins package,
-          // which is a workspace symlink to packages/plugins.
-          alias: {
-            ...existingAlias,
-            '@tona-plugins': path.resolve(
-              config.root ?? process.cwd(),
-              'node_modules/tona-plugins',
-            ),
           },
         },
         build: {
