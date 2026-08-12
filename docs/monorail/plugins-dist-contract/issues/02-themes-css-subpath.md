@@ -1,11 +1,12 @@
 # 02 — 5 主题插件 CSS 引用改写为裸包名子路径
 
-- Status: claimed
+- Status: done
 - Blocked by: 01
 
 ## Comments
 
 Batch 2026-08-12: start — 28a9bd31
+done — (4 主题 67 处 @import 改写为裸包名子路径，数量/顺序/:root 不动；plugins-css.test.ts 断言改裸包名模块 id 5 用例全绿；view 构建产物含插件样式端到端验证)
 
 ## What to build
 
