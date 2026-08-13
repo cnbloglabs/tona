@@ -1,6 +1,6 @@
 {
   "name": "tona-stylelint-one-utility-class-per-line",
-  "version": "1.0.25-beta.2",
+  "version": "1.0.25",
   "description": "Stylelint plugin for AWES CNB themes",
   "keywords": [
     "plugin",

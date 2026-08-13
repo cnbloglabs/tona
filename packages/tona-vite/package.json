@@ -1,6 +1,6 @@
 {
   "name": "tona-vite",
-  "version": "1.0.25-beta.2",
+  "version": "1.0.25",
   "description": "Vite plugin for Tona themes - combines dynamic script extension and shared assets serving",
   "keywords": [
     "dynamic-script",

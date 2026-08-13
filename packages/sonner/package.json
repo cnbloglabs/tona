@@ -1,6 +1,6 @@
 {
   "name": "tona-sonner",
-  "version": "1.0.25-beta.2",
+  "version": "1.0.25",
   "description": "Preact toast notification component based on sonner",
   "keywords": [
     "notification",
