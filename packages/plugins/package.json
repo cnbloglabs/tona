@@ -21,16 +21,15 @@
     "directory": "packages/plugins"
   },
   "files": [
-    "dist",
-    "index.d.ts"
+    "dist"
   ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./index.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
     "./*": "./dist/*"
@@ -46,6 +45,7 @@
     "tona-options": "workspace:*"
   },
   "devDependencies": {
+    "@types/jquery": "catalog:",
     "@types/node": "catalog:",
     "sass": "catalog:",
     "tona-vite": "workspace:*",

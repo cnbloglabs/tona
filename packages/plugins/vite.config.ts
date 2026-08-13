@@ -9,12 +9,14 @@ export default defineConfig({
   },
   plugins: [tona()],
   pack: {
-    // ADR-004：产物分发。不启用 dts——JS 源码无 JSDoc，类型契约保持手写 index.d.ts。
+    // ADR-004：产物分发。启用 dts——TS 源码产出真实声明（dist/index.d.ts），
+    // 取代原手写 index.d.ts（全 any 契约）。
     // platform: 'browser'——纯 DOM 包；node 平台默认会把 esm 产物命名为 .mjs
     platform: 'browser',
-    entry: ['./src/index.js'],
+    entry: ['./src/index.ts'],
     format: ['esm'],
     clean: true,
+    dts: true,
     plugins: [copyCssPlugin()],
   },
   build: {

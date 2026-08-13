@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vite-plus/test'
 /**
  * dist 产物契约（ADR-004）：plugins 从源码分发迁移为产物分发。
  * - dist/index.js 为 ESM 聚合 re-export（未 minify），含全部插件导出
+ * - dist/index.d.ts 为 TS 源码产出的真实类型声明（取代原手写全 any 的 index.d.ts）
  * - 插件 CSS 复制为 dist 扁平布局：dist/<相对 src/plugins 路径>，无 dist/plugins 层
  * - package.json exports/files/scripts 切换到产物契约
  *
@@ -15,7 +16,7 @@ const pkgRoot = path.resolve(__dirname, '..')
 const srcPluginsRoot = path.join(pkgRoot, 'src/plugins')
 const distRoot = path.join(pkgRoot, 'dist')
 
-/** 全部插件导出名（src/index.js 的 re-export 清单，30 个模块 31 个名字） */
+/** 全部插件导出名（src/index.ts 的 re-export 清单，30 个模块 31 个名字） */
 const PLUGIN_EXPORTS = [
   'background',
   'barrage',
@@ -48,6 +49,16 @@ const PLUGIN_EXPORTS = [
   'toast',
   'tools',
   'webTag',
+]
+
+/** tools 按钮工厂导出名 */
+const BUTTON_EXPORTS = [
+  'createBackTopButton',
+  'createLikeButton',
+  'createFollowButton',
+  'createFavoriteButton',
+  'createCommentButton',
+  'createDarkModeButton',
 ]
 
 function findFiles(dir: string, ext: string, out: string[] = []) {
@@ -110,6 +121,38 @@ describe('dist 产物契约：扁平布局 + exports 通配', () => {
     ).toBe(false)
   })
 
+  it('dist/index.d.ts 为生成的真实类型声明：全插件与按钮工厂具名导出，无 any 兜底', () => {
+    const file = path.join(distRoot, 'index.d.ts')
+    expect(
+      fs.existsSync(file),
+      'dist/index.d.ts 应存在（先运行 pnpm --dir packages/plugins build）',
+    ).toBe(true)
+
+    const code = fs.readFileSync(file, 'utf8')
+
+    // 全部插件工厂与 tools 按钮工厂的导出签名
+    const exportNames = [...PLUGIN_EXPORTS, ...BUTTON_EXPORTS]
+    for (const name of exportNames) {
+      expect(
+        code,
+        `dist/index.d.ts 应含 ${name} 的导出声明`,
+      ).toMatch(new RegExp(`\\b${name}\\b`))
+    }
+
+    // 类型契约真实化：Theme 取自核心包、选项为具名类型，导出签名不以 any 兜底
+    expect(code, 'Theme 应来自核心包 tona').toContain('tona')
+    expect(code, '不应再以 any 兜底导出签名').not.toMatch(
+      /(?:export (?:declare )?function \w+\([^)]*\): any)/,
+    )
+    expect(code, '不应含手写全 any 契约的 createXxxButton(options?: Record<string, any>)').not.toContain(
+      'options?: Record<string, any>',
+    )
+    expect(code, '不应含手写全 any 契约的 (theme: any, devOptions?: any)').not.toContain(
+      '(theme: any, devOptions?: any)',
+    )
+    expect(code, '声明应真实具名（含选项类型接口名）').toContain('ToolbarItem')
+  })
+
   it('package.json exports/files/scripts 切换到产物契约', () => {
     const pkg = JSON.parse(fs.readFileSync(path.join(pkgRoot, 'package.json'), 'utf8'))
 
@@ -117,15 +160,14 @@ describe('dist 产物契约：扁平布局 + exports 通配', () => {
     expect(pkg.exports['.'].import, 'exports["."].import 应指向 dist').toBe(
       './dist/index.js',
     )
-    expect(pkg.exports['.'].types, 'exports["."].types 保持手写 index.d.ts').toBe(
-      './index.d.ts',
+    expect(pkg.exports['.'].types, 'exports["."].types 应指向生成声明').toBe(
+      './dist/index.d.ts',
     )
     expect(pkg.main).toBe('./dist/index.js')
     expect(pkg.module).toBe('./dist/index.js')
-    expect(pkg.types).toBe('./index.d.ts')
-    expect(pkg.files, 'files 应只发布 dist + index.d.ts').toEqual([
+    expect(pkg.types, 'types 应指向生成声明').toBe('./dist/index.d.ts')
+    expect(pkg.files, 'files 应只发布 dist（手写 index.d.ts 已移除）').toEqual([
       'dist',
-      'index.d.ts',
     ])
     expect(pkg.scripts.build, 'build 应为 vp pack').toBe('vp pack')
     expect(pkg.scripts.dev, 'dev 应为 vp pack --watch').toBe('vp pack --watch')

@@ -152,7 +152,7 @@ describe('tools 按钮化重构：零默认、按钮对象、顺序即视觉', (
     expect(item).not.toBeNull()
 
     const $ = (globalThis as Record<string, unknown>).$ as unknown as (
-      sel: string,
+      sel: string | Window,
     ) => { trigger: (ev: string) => void }
     expect(() => $('.mode-change').trigger('click')).not.toThrow()
   })
@@ -165,7 +165,7 @@ describe('tools 按钮化重构：零默认、按钮对象、顺序即视觉', (
     })
 
     const $ = (globalThis as Record<string, unknown>).$ as unknown as (
-      sel: string,
+      sel: string | Window,
     ) => { trigger: (ev: string) => void }
     const toolbar = document.querySelector('.custom-toolbar')
     expect(toolbar?.classList.contains('extend')).toBe(false)
@@ -196,7 +196,7 @@ describe('tools 按钮化重构：零默认、按钮对象、顺序即视觉', (
     })
 
     const $ = (globalThis as Record<string, unknown>).$ as unknown as (
-      sel: string,
+      sel: string | Window,
     ) => { trigger: (ev: string) => void }
     $('.toolbar-item-toggle:not(.active)').trigger('click') // 展开
 
@@ -216,7 +216,7 @@ describe('tools 按钮化重构：零默认、按钮对象、顺序即视觉', (
     })
 
     const $ = (globalThis as Record<string, unknown>).$ as unknown as (
-      sel: string,
+      sel: string | Window,
     ) => { trigger: (ev: string) => void }
     $('.toolbar-item-toggle:not(.active)').trigger('click')
 
@@ -263,7 +263,7 @@ describe('tools 按钮化重构：零默认、按钮对象、顺序即视觉', (
 
     // 点击 → light：图标、html theme、localStorage 全部更新
     const $ = (globalThis as Record<string, unknown>).$ as unknown as (
-      sel: string,
+      sel: string | Window,
     ) => { trigger: (ev: string) => void }
     $('.mode-change').trigger('click')
     expect(icon?.getAttribute('class')).toBe('fa-sun')

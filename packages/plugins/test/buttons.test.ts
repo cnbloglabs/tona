@@ -83,13 +83,14 @@ describe('通用按钮工厂（seam A）', () => {
 
   it('5 个工厂均从 tona-plugins 主入口具名导出', async () => {
     const { bundle } = await loadButtons()
-    for (const name of [
+    const names: Array<keyof typeof bundle> = [
       'createBackTopButton',
       'createLikeButton',
       'createFollowButton',
       'createFavoriteButton',
       'createCommentButton',
-    ]) {
+    ]
+    for (const name of names) {
       expect(typeof bundle[name]).toBe('function')
     }
   })
@@ -146,7 +147,10 @@ describe('通用按钮工厂（seam A）', () => {
     it('callback 由闭包绑定，不接受 options 覆盖', async () => {
       const { buttons } = await loadButtons()
       const passed = vi.fn()
-      const btn = buttons.createBackTopButton({ callback: passed })
+      // callback 不在按钮 options 契约内（闭包绑定），测试显式断言运行时忽略它
+      const btn = buttons.createBackTopButton({
+        callback: passed,
+      } as unknown as Parameters<typeof buttons.createBackTopButton>[0])
 
       btn.callback({ scrollContainer: 'html' })
       expect(passed).not.toHaveBeenCalled()

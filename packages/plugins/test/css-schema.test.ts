@@ -106,8 +106,8 @@ describe('css schema：插件 scss → css + CSS 变量迁移', () => {
     expect(css, '不应含 sass #{} 插值').not.toContain('#{')
   })
 
-  it('example/index.js 的 import 已改为 ./index.css', () => {
-    const js = fs.readFileSync(path.join(exampleDir, 'index.js'), 'utf8')
+  it('example/index.ts 的 import 已改为 ./index.css', () => {
+    const js = fs.readFileSync(path.join(exampleDir, 'index.ts'), 'utf8')
     expect(js).toContain("import './index.css'")
   })
 })

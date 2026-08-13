@@ -277,6 +277,9 @@ importers:
         specifier: workspace:*
         version: link:../options
     devDependencies:
+      '@types/jquery':
+        specifier: 'catalog:'
+        version: 4.0.0
       '@types/node':
         specifier: 'catalog:'
         version: 25.5.0

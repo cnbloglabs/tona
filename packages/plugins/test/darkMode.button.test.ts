@@ -227,12 +227,12 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const btn = mod.createDarkModeButton({
         callback: passedCallback,
         setup: passedSetup,
-      })
+      } as unknown as Parameters<typeof mod.createDarkModeButton>[0])
 
       expect(btn.callback).not.toBe(passedCallback)
       expect(btn.setup).not.toBe(passedSetup)
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       btn.callback({})
       expect(passedCallback).not.toHaveBeenCalled()
       expect(passedSetup).not.toHaveBeenCalled()
@@ -244,7 +244,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton({ darkDefault: true })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.htmlTheme).toBe('dark')
 
       // dark → light
@@ -267,7 +267,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton({ darkDefault: true })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       btn.callback({}) // dark → light
       btn.callback({}) // light → system
       expect(localStorage.getItem('modeType')).toBe('system')
@@ -284,7 +284,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton()
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.htmlTheme).toBe('dark')
     })
 
@@ -294,7 +294,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton()
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.htmlTheme).toBe('dark')
       expect(localStorage.getItem('modeType')).toBe('system')
     })
@@ -303,7 +303,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton()
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.htmlTheme).toBe('light')
       expect(localStorage.getItem('modeType')).toBeNull()
     })
@@ -312,7 +312,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton({ darkDefault: true })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.htmlTheme).toBe('dark')
       expect(localStorage.getItem('modeType')).toBeNull()
     })
@@ -322,7 +322,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const mod = await loadButtons()
       const btn = mod.createDarkModeButton({ followSystem: true })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.htmlTheme).toBe('dark')
       expect(localStorage.getItem('modeType')).toBeNull()
     })
@@ -335,7 +335,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
         iconType: 'html',
       })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.iconHtml).toBe('🌜')
       expect(jq.state.tooltipText).toBe('深色')
     })
@@ -349,7 +349,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
         tooltip: '昼夜',
       })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.iconClass).toBe('fa-adjust')
       expect(jq.state.tooltipText).toBe('昼夜')
     })
@@ -361,7 +361,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
         iconType: 'className',
       })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.iconClass).toBe('fa-moon')
       expect(jq.state.tooltipText).toBe('深色')
     })
@@ -383,7 +383,7 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
         },
       })
 
-      btn.setup(null, {})
+      btn.setup!(null as never, {})
       expect(jq.state.iconClass).toBe('icon-dark')
       expect(jq.state.tooltipText).toBe('暗')
 
@@ -403,7 +403,11 @@ describe('createDarkModeButton 按钮工厂（seam A）', () => {
       const btn = mod.createDarkModeButton({ darkDefault: true })
       const stopPropagation = vi.fn()
 
-      btn.callback({}, { stopPropagation })
+      // 事件实参按 jquery 事件形态传入（callback 仅调用 stopPropagation）
+      btn.callback(
+        {},
+        { stopPropagation } as unknown as Parameters<typeof btn.callback>[1],
+      )
 
       expect(stopPropagation).toHaveBeenCalledTimes(1)
       expect(jq.state.htmlTheme).toBe('light') // dark → light

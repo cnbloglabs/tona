@@ -4,5 +4,5 @@
     "baseUrl": ".",
     "types": ["vite/client", "node", "jquery"]
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts"]
 }
